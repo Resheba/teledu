@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
     TELEGRAM_TOKEN: str = ""
+    VIDEO_IDS: list[str] = []
 
     @classmethod
     @cache
