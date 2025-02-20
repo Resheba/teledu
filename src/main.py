@@ -1,8 +1,14 @@
-# from src.config import Settings
+import asyncio
+
+from src.config import Settings
+
+from .telegram import Telegram
 
 
-def main() -> None: ...
+async def main() -> None:
+    settings: Settings = Settings.instance()
+    await Telegram.from_settings(settings).start()
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
