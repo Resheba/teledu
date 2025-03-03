@@ -8,7 +8,7 @@ WORKDIR /code
 
 COPY . .
 
-RUN chmod 775 docker/app.sh
+RUN chmod 777 docker/app.sh
 
 EXPOSE 80
 

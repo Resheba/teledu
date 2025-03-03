@@ -1,6 +1,7 @@
 from alchemynger import AsyncManager
+from sqlalchemy import select
 
-from .models import Answer, User
+from .models import Answer, Task, User, UserToTask
 
 
 class DatabaseService:
@@ -49,3 +50,22 @@ class DatabaseService:
     async def reject_answer(self, answer_id: int) -> None:
         stmt = self._manager[Answer].delete.where(Answer.id == answer_id)
         await self._manager.execute(stmt, commit=True)
+
+    async def get_user_tasks_statuses(self, telegram_id: int) -> list[tuple[Task, bool | None]]:
+        subquery = (
+            select(UserToTask.task_id, UserToTask.status)
+            .where(UserToTask.user_id == telegram_id)
+            .subquery()
+        )
+        stmt = (
+            select(Task, subquery.c.status)
+            .join(
+                subquery,
+                Task.id == subquery.c.task_id,
+                isouter=True,
+            )
+            .order_by(Task.id)
+        )
+        async with self._manager.get_session() as session:
+            results = await session.execute(statement=stmt)
+        return results.all()  # type: ignore[no-any-return]

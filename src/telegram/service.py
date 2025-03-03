@@ -6,7 +6,7 @@ from loguru import logger
 from src.config import Settings
 from src.database import DatabaseService
 
-from .services import admin_router, poll_router, registration_router
+from .services import admin_router, menu_router, poll_router, registration_router
 
 
 class Telegram:
@@ -25,5 +25,6 @@ class Telegram:
             registration_router,
             admin_router,
             poll_router,
+            menu_router,
         )
         await self._dispatcher.start_polling(self._bot, manager=manager, settings=self._settings)
