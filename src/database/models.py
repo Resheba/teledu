@@ -1,7 +1,9 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
-from sqlalchemy.orm import Mapped, declarative_base, relationship
+from sqlalchemy.ext.asyncio import AsyncAttrs
+from sqlalchemy.orm import DeclarativeBase, Mapped, relationship
 
-Base = declarative_base()
+
+class Base(AsyncAttrs, DeclarativeBase): ...
 
 
 class User(Base):
