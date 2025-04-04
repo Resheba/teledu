@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
     TELEGRAM_TOKEN: str = ""
-    VIDEO_IDS: list[str] = []
+    TEXTS_PATH: str = "resources/texts.json"
 
     @classmethod
     @cache

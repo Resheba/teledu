@@ -1,6 +1,6 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, ForeignKey
 from sqlalchemy.ext.asyncio import AsyncAttrs
-from sqlalchemy.orm import DeclarativeBase, Mapped, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(AsyncAttrs, DeclarativeBase): ...
@@ -9,54 +9,49 @@ class Base(AsyncAttrs, DeclarativeBase): ...
 class User(Base):
     __tablename__ = "user"
 
-    telegram_id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    email = Column(String, nullable=False)
+    telegram_id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(nullable=False)
+    contact: Mapped[str] = mapped_column(nullable=False)
 
     def __repr__(self) -> str:
-        return f"User(id={self.telegram_id}, name={self.name!r}, email={self.email!r})"
+        return f"User(id={self.telegram_id}, name={self.name!r}, contact={self.contact!r})"
+
+
+class Chapter(Base):
+    __tablename__ = "chapter"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(nullable=False)
 
 
 class Answer(Base):
     __tablename__ = "answer"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey(User.telegram_id, ondelete="CASCADE"), nullable=False)
-    text_answer = Column(String, nullable=False)
-    video_answer_id = Column(String, nullable=False)
-    is_approved = Column(Boolean, default=False, nullable=False)
-
-    user: Mapped[User] = relationship(
-        lazy="selectin",
-        foreign_keys=[user_id],
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey(User.telegram_id, ondelete="CASCADE"),
+        nullable=False,
     )
+    chapter_id: Mapped[int] = mapped_column(
+        ForeignKey(Chapter.id, ondelete="CASCADE"),
+    )
+    is_approved: Mapped[bool | None] = mapped_column(Boolean, default=None, nullable=True)
+
+    videos: Mapped[list["AnswerVideo"]] = relationship()
 
     def __repr__(self) -> str:
-        return (
-            f"Answer(id={self.id}, text_answer={self.text_answer!r},"
-            f" video_answer_id={self.video_answer_id!r})"
-        )
+        return f"Answer(id={self.id}, is_approved={self.is_approved})"  # 1391069512
 
 
-class Task(Base):
-    __tablename__ = "task"
+class AnswerVideo(Base):
+    __tablename__ = "answer_video"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=False)
-    text = Column(String, nullable=False)
-    video_id = Column(String, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    answer_id: Mapped[int] = mapped_column(
+        ForeignKey(Answer.id, ondelete="CASCADE"),
+        nullable=False,
+    )
+    video_id: Mapped[str] = mapped_column(nullable=False)
 
     def __repr__(self) -> str:
-        return f"Task(id={self.id}, text={self.text!r}, video_id={self.video_id!r})"
-
-
-class UserToTask(Base):
-    __tablename__ = "user_to_task"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-
-    user_id = Column(Integer, ForeignKey(User.telegram_id, ondelete="CASCADE"))
-    task_id = Column(Integer, ForeignKey(Task.id, ondelete="CASCADE"))
-    status = Column(Boolean, default=None, nullable=True)
-
-    # user: Mapped[User] = relationship(lazy="selectin", foreign_keys=[user_id])
-    task: Mapped[Task] = relationship(lazy="selectin", foreign_keys=[task_id])
+        return f"AnswerVideo(id={self.id}, answer_id={self.answer_id}, video_id={self.video_id!r})"

@@ -28,12 +28,12 @@ def create_answers_menu(
     results = [
         [
             InlineKeyboardButton(
-                text=answer.user.name,
+                text="answer.user.name",
                 callback_data=AnswerDetailCallback(answer_id=answer.id).pack(),
             ),
         ]
         for answer in answers[current_page * page_size : (current_page + 1) * page_size]
-        if answer.user is not None and answer.user.name and answer.id
+        if answer is not None
     ]
     helpers = []
     if current_page != 0:

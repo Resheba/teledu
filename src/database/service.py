@@ -1,10 +1,14 @@
-from alchemynger import AsyncManager
-from sqlalchemy import select
+from collections.abc import Iterable
 
-from .models import Answer, Task, User, UserToTask
+from alchemynger import AsyncManager
+from sqlalchemy import insert, select, update
+
+from .models import Answer, Chapter, User
 
 
 class DatabaseService:
+    __slots__ = ("_manager",)
+
     def __init__(self, manager: AsyncManager) -> None:
         self._manager: AsyncManager = manager
 
@@ -13,8 +17,8 @@ class DatabaseService:
         result: User | None = await self._manager.execute(stmt)
         return bool(result)
 
-    async def create_user(self, user_id: int, name: str, email: str) -> None:
-        stmt = self._manager[User].insert.values(telegram_id=user_id, name=name, email=email)
+    async def create_user(self, user_id: int, name: str, contact: str) -> None:
+        stmt = self._manager[User].insert.values(telegram_id=user_id, name=name, contact=contact)
         await self._manager.execute(stmt, commit=True)
 
     async def create_answer(self, user_id: int, text_answer: str, video_answer_id: str) -> None:
@@ -51,21 +55,36 @@ class DatabaseService:
         stmt = self._manager[Answer].delete.where(Answer.id == answer_id)
         await self._manager.execute(stmt, commit=True)
 
-    async def get_user_tasks_statuses(self, telegram_id: int) -> list[tuple[Task, bool | None]]:
-        subquery = (
-            select(UserToTask.task_id, UserToTask.status)
-            .where(UserToTask.user_id == telegram_id)
-            .subquery()
-        )
-        stmt = (
-            select(Task, subquery.c.status)
-            .join(
-                subquery,
-                Task.id == subquery.c.task_id,
-                isouter=True,
-            )
-            .order_by(Task.id)
-        )
+    # async def get_user_tasks_statuses(self, telegram_id: int) -> list[tuple[Task, bool | None]]:
+    #     subquery = (
+    #         select(UserToTask.task_id, UserToTask.status)
+    #         .where(UserToTask.user_id == telegram_id)
+    #         .subquery()
+    #     )
+    #     stmt = (
+    #         select(Task, subquery.c.status)
+    #         .join(
+    #             subquery,
+    #             Task.id == subquery.c.task_id,
+    #             isouter=True,
+    #         )
+    #         .order_by(Task.id)
+    #     )
+    #     async with self._manager.get_session() as session:
+    #         results = await session.execute(statement=stmt)
+    #     return results.all()  # type: ignore[no-any-return]
+
+    async def migrate_chapters(self, chapters_names: Iterable[str]) -> None:
         async with self._manager.get_session() as session:
-            results = await session.execute(statement=stmt)
-        return results.all()  # type: ignore[no-any-return]
+            db_chapters: int | None = (await session.execute(select(Chapter.id))).scalars().first()
+            if db_chapters is not None:
+                await session.execute(
+                    update(Chapter),
+                    [{"id": id_, "name": name} for id_, name in enumerate(chapters_names, start=1)],
+                )
+            else:
+                await session.execute(
+                    insert(Chapter),
+                    [{"id": id_, "name": name} for id_, name in enumerate(chapters_names, start=1)],
+                )
+            await session.commit()

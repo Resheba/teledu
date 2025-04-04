@@ -1,15 +1,17 @@
+from asyncio import sleep
+
 from aiogram import Router
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from loguru import logger
 
-from src.config import Settings
+from src.config import Texts
 from src.database import DatabaseService
-from src.telegram.services.poll.router import start_poll
+from src.telegram.services.menu.router import menu_handler
 
 from .states import RegistrationStateGroup
-from .utils import valid_email, valid_name
+from .utils import valid_email, valid_name, valid_number
 
 router: Router = Router(name="registration")
 
@@ -19,28 +21,30 @@ async def start_command(
     message: Message,
     state: FSMContext,
     manager: DatabaseService,
-    settings: Settings,
+    texts: Texts,
 ) -> None:
     if message.from_user is None:  # bot check
         return
-    await message.answer(
-        "Привет! Это чат-бот для обучения безопасности работ на опорах "
-        "воздушных линиях связи с использованием приставных лестниц!",
-    )
+    await message.answer_photo(texts.registration.image_id, caption=texts.registration.form_1.text)
     if not await manager.is_user_created(message.from_user.id):
         await state.set_state(RegistrationStateGroup.name)
-        await message.answer("Как вас зовут?")
+        await message.answer(texts.registration.form_2.text)
     else:
-        await start_poll(message=message, settings=settings, state=state)
+        await sleep(0.8)
+        await menu_handler(message=message)
 
 
 @router.message(RegistrationStateGroup.name)
-async def reg_name(message: Message, state: FSMContext) -> None:
+async def reg_name(
+    message: Message,
+    state: FSMContext,
+    texts: Texts,
+) -> None:
     if message.text and valid_name(name := message.text.strip()):
         await state.update_data(name=name)
         await message.reply(f"Приятно познакомиться, {name}!")
         await state.set_state(RegistrationStateGroup.email)
-        await message.answer("Пожалуйста, зарегистрируйтесь, указав свою электронную почту.")
+        await message.answer(texts.registration.form_3.text)
     else:
         await message.answer("Некорректное имя.\nПожалуйста, введите Ваше имя.")
 
@@ -50,20 +54,20 @@ async def reg_email(
     message: Message,
     state: FSMContext,
     manager: DatabaseService,
-    settings: Settings,
+    texts: Texts,
 ) -> None:
     if message.from_user is None:  # bot check
         await state.clear()
         return
-    if message.text and valid_email(email := message.text.strip()):
-        await message.answer("Вы успешно зарегистрированы!")
+    if message.text and (valid_email(email := message.text.strip()) or valid_number(number=email)):
+        await message.answer(texts.registration.form_4.text)
         await manager.create_user(
             user_id=message.from_user.id,
-            email=email,
+            contact=email,
             name=await state.get_value("name", ""),
         )
         await state.clear()
         logger.info(f"User {message.from_user.id} registered.")
-        await start_poll(message=message, settings=settings, state=state)
+        await menu_handler(message=message)
     else:
-        await message.answer("Некорректный email.\nПожалуйста, введите Ваш email.")
+        await message.answer("Некорректные данные, повторите попытку.")

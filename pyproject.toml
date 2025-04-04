@@ -13,6 +13,7 @@ pydantic-settings = "^2.7.1"
 aiogram = "^3.18.0"
 alchemynger = "^0.2.1"
 aiosqlite = "^0.21.0"
+pydantic = "2.10.6"
 
 [tool.poetry.group.dev.dependencies]
 typing-extensions = "^4.12.2"
