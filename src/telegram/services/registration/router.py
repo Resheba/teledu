@@ -23,10 +23,8 @@ async def start_command(
     manager: DatabaseService,
     texts: Texts,
 ) -> None:
-    if message.from_user is None:  # bot check
-        return
     await message.answer_photo(texts.registration.image_id, caption=texts.registration.form_1.text)
-    if not await manager.is_user_created(message.from_user.id):
+    if not await manager.is_user_created(message.chat.id):
         await state.set_state(RegistrationStateGroup.name)
         await message.answer(texts.registration.form_2.text)
     else:

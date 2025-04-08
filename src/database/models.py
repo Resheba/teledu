@@ -1,3 +1,6 @@
+from typing import Literal, NamedTuple
+
+from pydantic import TypeAdapter, field_validator
 from sqlalchemy import Boolean, ForeignKey
 from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
@@ -40,7 +43,7 @@ class Answer(Base):
     videos: Mapped[list["AnswerVideo"]] = relationship()
 
     def __repr__(self) -> str:
-        return f"Answer(id={self.id}, is_approved={self.is_approved})"  # 1391069512
+        return f"Answer(id={self.id}, is_approved={self.is_approved})"
 
 
 class AnswerVideo(Base):
@@ -55,3 +58,21 @@ class AnswerVideo(Base):
 
     def __repr__(self) -> str:
         return f"AnswerVideo(id={self.id}, answer_id={self.answer_id}, video_id={self.video_id!r})"
+
+
+class ChapterAnswerDTO(NamedTuple):
+    id: int
+    name: str
+    is_approved: Literal["ON_ACC"] | bool | None
+
+    @field_validator("is_approved")
+    @classmethod
+    def is_approved_to_bool(cls, value: object) -> bool | Literal["ON_ACC"] | None:
+        if value == "ON_ACC":
+            return "ON_ACC"
+        if value is None:
+            return None
+        return bool(value)
+
+
+UserAnswersDTO = TypeAdapter(list[ChapterAnswerDTO])

@@ -2,9 +2,14 @@ from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
-from src.config import Texts
+from src.database import DatabaseService
 
-from .keyboards import EducationMenuCallbackData, MenuCallbackData, MenuKeyboard
+from .keyboards import (
+    EducationChapterCallbackData,
+    EducationMenuCallbackData,
+    MenuCallbackData,
+    MenuKeyboard,
+)
 
 router: Router = Router(name="menu")
 
@@ -27,7 +32,22 @@ async def menu_cb_handler(
 @router.callback_query(EducationMenuCallbackData.filter())
 async def edu_handler(
     query: CallbackQuery,
-    texts: Texts,
+    manager: DatabaseService,
 ) -> None:
     if isinstance(query.message, Message):
-        await query.message.edit_reply_markup(reply_markup=MenuKeyboard.edu_keyboard(texts))
+        answers = await manager.get_user_chapter_answers(query.message.chat.id)
+        await query.message.edit_reply_markup(reply_markup=MenuKeyboard.edu_keyboard(answers))
+
+
+@router.callback_query(EducationChapterCallbackData.filter())
+async def edu_chapter_handler(
+    query: CallbackQuery,
+    callback_data: EducationChapterCallbackData,
+    manager: DatabaseService,
+) -> None:
+    if callback_data.id == 1:
+        await manager.create_answer(
+            user_id=query.from_user.id,
+            chapter_id=callback_data.id,
+            videos=["texts.education.edu2.form_2.video_id"],
+        )

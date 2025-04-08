@@ -1,14 +1,16 @@
-from functools import cache
+from typing import Literal
 
 from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-from src.config import Texts
+from src.database.models import ChapterAnswerDTO
 
 
-def _status_to_icon(status: bool | None) -> str:
+def _status_to_icon(status: bool | Literal["ON_ACC"] | None) -> str:
     if status is None:
         return ""
+    if status == "ON_ACC":
+        return "⌛️"
     return "✅" if status else "❌"
 
 
@@ -50,18 +52,17 @@ class MenuKeyboard:
         ],
     )
 
-    @cache
     @staticmethod
-    def edu_keyboard(texts: Texts) -> InlineKeyboardMarkup:
+    def edu_keyboard(chapters: list[ChapterAnswerDTO]) -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup(
             inline_keyboard=[
                 [
                     InlineKeyboardButton(
-                        text=edu.main_button_text,
+                        text=(_status_to_icon(edu.is_approved) + " " + edu.name).strip(),
                         callback_data=EducationChapterCallbackData(id=edu.id).pack(),
                     ),
                 ]
-                for edu in texts.education.all
+                for edu in chapters
             ]
             + [[InlineKeyboardButton(text="◀️ Назад", callback_data=MenuCallbackData().pack())]],
         )
