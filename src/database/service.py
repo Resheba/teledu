@@ -57,17 +57,23 @@ class DatabaseService:
             return None
         return result[0]
 
-    async def create_answer(self, user_id: int, chapter_id: int, videos: list[str]) -> None:
+    async def create_answer(self, user_id: int, chapter_id: int, videos: list[str]) -> Answer:
         answer: Answer = Answer(user_id=user_id, chapter_id=chapter_id)
         answer.videos = [AnswerVideo(video_id=video_id) for video_id in videos]
         async with self._manager.get_session() as session:
             session.add(answer)
             await session.commit()
+            await session.refresh(answer)
+        return answer
 
     async def get_user_chapter_answers(self, user_id: int) -> list[ChapterAnswerDTO]:
         async with self._manager.get_session() as session:
             result = await session.execute(self.__user_answers_subquery, {"user_id": user_id})
             return UserAnswersDTO.validate_python(map(tuple, result.all()))
+
+    async def approve_answer(self, answer_id: int) -> None:
+        stmt = self._manager[Answer].update.where(Answer.id == answer_id).values(is_approved=True)
+        await self._manager.execute(stmt, commit=True)
 
     # async def get_answer(self, answer_id: int) -> Answer | None:
     #     stmt = self._manager[Answer].select.where(Answer.id == answer_id)

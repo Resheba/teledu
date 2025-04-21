@@ -4,6 +4,7 @@ from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from src.database.models import ChapterAnswerDTO
+from src.telegram.services.poll.keyboards import EducationChapterCallbackData
 
 
 def _status_to_icon(status: bool | Literal["ON_ACC"] | None) -> str:
@@ -33,10 +34,6 @@ class EducationMenuCallbackData(CallbackData, prefix="edu"): ...
 
 
 class MenuCallbackData(CallbackData, prefix="menu"): ...
-
-
-class EducationChapterCallbackData(CallbackData, prefix="edu"):
-    id: int
 
 
 class MenuKeyboard:
