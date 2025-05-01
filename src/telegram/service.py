@@ -21,6 +21,7 @@ from .services import (
     task8_router,
     task9_router,
     task10_router,
+    task11_router,
 )
 from .services.menu.router import router as menu_router
 
@@ -52,6 +53,7 @@ class Telegram:
             task8_router,
             task9_router,
             task10_router,
+            task11_router,
         )
         await self._bot.set_my_commands(
             commands=[
