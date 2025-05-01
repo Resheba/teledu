@@ -9,6 +9,7 @@ from .tasks import (
     task7_router,
     task8_router,
     task9_router,
+    task10_router,
 )
 
 __all__ = (
@@ -22,4 +23,5 @@ __all__ = (
     "task7_router",
     "task8_router",
     "task9_router",
+    "task10_router",
 )
