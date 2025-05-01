@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, HttpUrl, field_validator
 
 
 class Form(BaseModel):
@@ -143,7 +143,52 @@ class Education(BaseModel):
         )
 
 
-class Documents(BaseModel): ...
+class Document(BaseModel):
+    name: str
+    url: HttpUrl
+
+
+class DocumentSet(BaseModel):
+    name: str
+    docs: tuple[Document, ...]
+
+    def __hash__(self) -> int:
+        return hash(self.name)
+
+    @field_validator("docs")
+    @classmethod
+    def validate_docs(cls, value: list[Document]) -> tuple[Document, ...]:
+        return tuple(value)
+
+
+class Documents(BaseModel):
+    d1: DocumentSet = Field(alias="1")
+    d2: DocumentSet = Field(alias="2")
+    d3: DocumentSet = Field(alias="3")
+    d4: DocumentSet = Field(alias="4")
+    d5: DocumentSet = Field(alias="5")
+    d6: DocumentSet = Field(alias="6")
+    d7: DocumentSet = Field(alias="7")
+    d8: DocumentSet = Field(alias="8")
+    d9: DocumentSet = Field(alias="9")
+    d10: DocumentSet = Field(alias="10")
+    d11: DocumentSet = Field(alias="11")
+
+    @property
+    def all(self) -> tuple[DocumentSet, ...]:
+        return (
+            self.d1,
+            self.d2,
+            self.d3,
+            self.d4,
+            self.d5,
+            self.d6,
+            self.d7,
+            self.d8,
+            self.d9,
+            self.d10,
+            self.d11,
+        )
 
 
 class Exam(BaseModel):

@@ -2,10 +2,13 @@ from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
+from src.config import Texts
 from src.database import DatabaseService
 
 from .keyboards import (
+    DocsCallbackData,
     EducationMenuCallbackData,
+    LibraryCallbackData,
     MenuCallbackData,
     MenuKeyboard,
 )
@@ -36,3 +39,26 @@ async def edu_handler(
     if isinstance(query.message, Message):
         answers = await manager.get_user_chapter_answers(query.message.chat.id)
         await query.message.edit_reply_markup(reply_markup=MenuKeyboard.edu_keyboard(answers))
+
+
+@router.callback_query(LibraryCallbackData.filter())
+async def library_handler(
+    query: CallbackQuery,
+    texts: Texts,
+) -> None:
+    if isinstance(query.message, Message):
+        await query.message.edit_reply_markup(reply_markup=MenuKeyboard.library_keyboard(texts))
+
+
+@router.callback_query(DocsCallbackData.filter())
+async def docs_handler(
+    query: CallbackQuery,
+    callback_data: DocsCallbackData,
+    texts: Texts,
+) -> None:
+    if isinstance(query.message, Message):
+        await query.message.edit_reply_markup(
+            reply_markup=MenuKeyboard.docs_keyboard(
+                texts.documents.all[callback_data.page],
+            ),
+        )
