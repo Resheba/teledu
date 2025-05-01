@@ -7,7 +7,14 @@ from loguru import logger
 from src.config import Settings, Texts
 from src.database import DatabaseService
 
-from .services import admin_router, poll_router, registration_router, task1_router, task2_router
+from .services import (
+    admin_router,
+    poll_router,
+    registration_router,
+    task1_router,
+    task2_router,
+    task3_router,
+)
 from .services.menu.router import router as menu_router
 
 
@@ -30,6 +37,7 @@ class Telegram:
             menu_router,
             task1_router,
             task2_router,
+            task3_router,
         )
         await self._bot.set_my_commands(
             commands=[
