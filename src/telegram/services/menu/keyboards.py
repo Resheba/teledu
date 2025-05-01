@@ -4,7 +4,7 @@ from typing import Literal
 from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-from src.config import Texts
+from src.config import Settings, Texts
 from src.config.resources import DocumentSet
 from src.database.models import ChapterAnswerDTO
 from src.telegram.services.poll.keyboards import EducationChapterCallbackData
@@ -39,9 +39,9 @@ class MenuKeyboard:
                 ("📖 Обучение", EducationMenuCallbackData().pack()),
                 ("📚 Библиотека документов", LibraryCallbackData().pack()),
                 ("✏️ Сдать экзамен", "exam"),
-                ("📞 Контакты", "contact"),
             )
-        ],
+        ]
+        + [[InlineKeyboardButton(text="📞 Контакты", url=Settings.instance().CONTACT_URL)]],
     )
 
     @staticmethod
