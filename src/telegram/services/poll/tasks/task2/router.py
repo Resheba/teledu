@@ -1,6 +1,13 @@
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, Message
+from aiogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    KeyboardButton,
+    Message,
+    ReplyKeyboardMarkup,
+)
 
 from src.config import Texts
 from src.database import DatabaseService
@@ -57,6 +64,13 @@ async def form3(
 
     await query.message.answer(
         text=texts.education.edu2.form_3.text,
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                [KeyboardButton(text="Отмена")],
+            ],
+            one_time_keyboard=True,
+            resize_keyboard=True,
+        ),
     )
     await state.set_state(VideoT2StateGroup.video)
 
@@ -67,6 +81,10 @@ async def video(
     state: FSMContext,
     texts: Texts,
 ) -> None:
+    if message.text == "Отмена":
+        await state.clear()
+        await menu_handler(message=message)
+        return
     if message.video is None:
         await message.answer("Пожалуйста, отправьте видео.")
         return
