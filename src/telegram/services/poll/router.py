@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from src.config import Texts
+from src.database import DatabaseService
 
 from .keyboards import EducationChapterCallbackData
 from .tasks import (
@@ -18,6 +19,7 @@ from .tasks import (
     start_task9,
     start_task10,
     start_task11,
+    start_task12,
 )
 
 router: Router = Router(name="poll")
@@ -43,9 +45,13 @@ async def menu_cb_handler(
     query: CallbackQuery,
     callback_data: EducationChapterCallbackData,
     state: FSMContext,
+    manager: DatabaseService,
     texts: Texts,
 ) -> None:
     if not isinstance(query.message, Message):
+        return
+    if callback_data.id == 12:  # noqa: PLR2004
+        await start_task12(query.message, texts, state, manager)
         return
     if callback_data.id not in _starts:
         return

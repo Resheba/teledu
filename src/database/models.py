@@ -40,7 +40,7 @@ class Answer(Base):
     )
     is_approved: Mapped[bool | None] = mapped_column(Boolean, default=None, nullable=True)
 
-    videos: Mapped[list["AnswerVideo"]] = relationship()
+    videos: Mapped[list["AnswerVideo"]] = relationship(passive_deletes=True)
 
     def __repr__(self) -> str:
         return f"Answer(id={self.id}, is_approved={self.is_approved})"

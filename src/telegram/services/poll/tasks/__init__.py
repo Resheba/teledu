@@ -20,6 +20,8 @@ from .task10 import start as start_task10
 from .task10 import task10_router
 from .task11 import start as start_task11
 from .task11 import task11_router
+from .task12 import start as start_task12
+from .task12 import task12_router
 
 __all__ = (
     "start_task1",
@@ -44,4 +46,6 @@ __all__ = (
     "start_task10",
     "task11_router",
     "start_task11",
+    "task12_router",
+    "start_task12",
 )

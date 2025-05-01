@@ -2,6 +2,7 @@ import asyncio
 from pathlib import Path
 
 from alchemynger import AsyncManager
+from sqlalchemy import text
 
 from src.config import Settings, Texts
 
@@ -18,6 +19,7 @@ async def main() -> None:
     texts: Texts = Texts.model_validate_json(_texts_path.read_text(encoding="utf-8"))
 
     manager: AsyncManager = AsyncManager(path="sqlite+aiosqlite:///test.sql", base=Base)
+    await manager.execute(text("PRAGMA foreign_keys=ON"))  # fix sqlite fk cascade
     await manager.create_all()
 
     db_service: DatabaseService = DatabaseService(manager=manager)

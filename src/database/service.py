@@ -1,7 +1,7 @@
 from collections.abc import Iterable
 
 from alchemynger import AsyncManager
-from sqlalchemy import insert, select, text, update
+from sqlalchemy import case, func, insert, select, text, update
 
 from .models import Answer, AnswerVideo, Chapter, ChapterAnswerDTO, User, UserAnswersDTO
 
@@ -61,6 +61,18 @@ class DatabaseService:
         answer: Answer = Answer(user_id=user_id, chapter_id=chapter_id)
         answer.videos = [AnswerVideo(video_id=video_id) for video_id in videos]
         async with self._manager.get_session() as session:
+            existed_answer_id: int | None = (
+                await session.execute(
+                    select(Answer.id).where(
+                        Answer.user_id == user_id,
+                        Answer.chapter_id == chapter_id,
+                    ),
+                )
+            ).scalar_one_or_none()
+            if existed_answer_id is not None:
+                await session.execute(
+                    self._manager[Answer].delete.where(Answer.id == existed_answer_id),
+                )
             session.add(answer)
             await session.commit()
             await session.refresh(answer)
@@ -70,6 +82,20 @@ class DatabaseService:
         async with self._manager.get_session() as session:
             result = await session.execute(self.__user_answers_subquery, {"user_id": user_id})
             return UserAnswersDTO.validate_python(map(tuple, result.all()))
+
+    async def is_user_completed_all_chapters(self, user_id: int) -> bool:
+        cond = case(
+            (func.count(Answer.id) == 11, True),  # noqa: PLR2004
+            else_=False,
+        )
+
+        stmt = self._manager[cond].select.where(
+            Answer.user_id == user_id,
+        )
+        async with self._manager.get_session() as session:
+            result = await session.execute(stmt)
+            res: bool = result.scalars().first()
+            return res
 
     async def approve_answer(self, answer_id: int) -> None:
         stmt = self._manager[Answer].update.where(Answer.id == answer_id).values(is_approved=True)
