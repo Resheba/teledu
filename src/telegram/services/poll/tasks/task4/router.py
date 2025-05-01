@@ -81,6 +81,7 @@ async def form4(
     if not isinstance(query.message, Message):
         return
 
+    await query.message.delete_reply_markup()
     await query.message.answer(
         text=texts.education.edu4.form_4.text,
         reply_markup=ReplyKeyboardMarkup(
@@ -174,6 +175,7 @@ async def form7(
     if not isinstance(query.message, Message):
         return
 
+    await query.message.delete_reply_markup()
     await query.message.answer(
         text=texts.education.edu4.form_7.text,
         reply_markup=ReplyKeyboardMarkup(
@@ -267,6 +269,7 @@ async def form10(
     if not isinstance(query.message, Message):
         return
 
+    await query.message.delete_reply_markup()
     await query.message.answer(
         text=texts.education.edu4.form_10.text,
         reply_markup=ReplyKeyboardMarkup(
@@ -360,6 +363,7 @@ async def form13(
     if not isinstance(query.message, Message):
         return
 
+    await query.message.delete_reply_markup()
     await query.message.answer(
         text=texts.education.edu4.form_13.text,
         reply_markup=ReplyKeyboardMarkup(
@@ -453,6 +457,7 @@ async def form16(
     if not isinstance(query.message, Message):
         return
 
+    await query.message.delete_reply_markup()
     await query.message.answer(
         text=texts.education.edu4.form_16.text,
         reply_markup=ReplyKeyboardMarkup(

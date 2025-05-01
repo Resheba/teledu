@@ -62,6 +62,7 @@ async def form3(
     if not isinstance(query.message, Message):
         return
 
+    await query.message.delete_reply_markup()
     await query.message.answer(
         text=texts.education.edu2.form_3.text,
         reply_markup=ReplyKeyboardMarkup(

@@ -85,12 +85,13 @@ class DatabaseService:
 
     async def is_user_completed_all_chapters(self, user_id: int) -> bool:
         cond = case(
-            (func.count(Answer.id) == 11, True),  # noqa: PLR2004
+            (func.count(Answer.id) >= 11, True),  # noqa: PLR2004
             else_=False,
         )
 
         stmt = self._manager[cond].select.where(
             Answer.user_id == user_id,
+            Answer.is_approved == True,  # noqa: E712
         )
         async with self._manager.get_session() as session:
             result = await session.execute(stmt)
