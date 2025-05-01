@@ -15,6 +15,7 @@ from .tasks import (
     start_task6,
     start_task7,
     start_task8,
+    start_task9,
 )
 
 router: Router = Router(name="poll")
@@ -29,6 +30,7 @@ _starts = {
     6: start_task6,
     7: start_task7,
     8: start_task8,
+    9: start_task9,
 }
 
 
