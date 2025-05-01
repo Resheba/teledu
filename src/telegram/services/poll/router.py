@@ -6,7 +6,7 @@ from aiogram.types import CallbackQuery, Message
 from src.config import Texts
 
 from .keyboards import EducationChapterCallbackData
-from .tasks import start_task1, start_task2, start_task3, start_task4, start_task5
+from .tasks import start_task1, start_task2, start_task3, start_task4, start_task5, start_task6
 
 router: Router = Router(name="poll")
 
@@ -17,6 +17,7 @@ _starts = {
     3: start_task3,
     4: start_task4,
     5: start_task5,
+    6: start_task6,
 }
 
 
