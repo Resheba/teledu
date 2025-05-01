@@ -1,4 +1,6 @@
 from .task1 import start as start_task1
 from .task1 import task1_router
+from .task2 import start as start_task2
+from .task2 import task2_router
 
-__all__ = ("start_task1", "task1_router")
+__all__ = ("start_task1", "task1_router", "task2_router", "start_task2")

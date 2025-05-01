@@ -1,12 +1,13 @@
 from typing import Self
 
 from aiogram import Bot, Dispatcher
+from aiogram.types import BotCommand
 from loguru import logger
 
 from src.config import Settings, Texts
 from src.database import DatabaseService
 
-from .services import admin_router, poll_router, registration_router, task1_router
+from .services import admin_router, poll_router, registration_router, task1_router, task2_router
 from .services.menu.router import router as menu_router
 
 
@@ -28,6 +29,13 @@ class Telegram:
             poll_router,
             menu_router,
             task1_router,
+            task2_router,
+        )
+        await self._bot.set_my_commands(
+            commands=[
+                BotCommand(command="/start", description="Start"),
+                BotCommand(command="/menu", description="Menu"),
+            ],
         )
         await self._dispatcher.start_polling(
             self._bot,
