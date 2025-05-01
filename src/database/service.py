@@ -73,6 +73,7 @@ class DatabaseService:
                 await session.execute(
                     self._manager[Answer].delete.where(Answer.id == existed_answer_id),
                 )
+                answer.id = existed_answer_id
             session.add(answer)
             await session.commit()
             await session.refresh(answer)
