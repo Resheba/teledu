@@ -14,3 +14,4 @@ class TasksStateGroup(StatesGroup):
     edu10: State = State()
     edu11: State = State()
     edu12: State = State()
+    exam: State = State()

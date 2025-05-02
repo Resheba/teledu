@@ -1,5 +1,6 @@
 from .router import router
 from .tasks import (
+    exam_router,
     task1_router,
     task2_router,
     task3_router,
@@ -28,4 +29,5 @@ __all__ = (
     "task10_router",
     "task11_router",
     "task12_router",
+    "exam_router",
 )

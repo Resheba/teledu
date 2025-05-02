@@ -249,34 +249,100 @@
                     "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
                 },
                 {
-                    "name": "2_Страх_привязь_ST2, ST3, ST5, ST6, ST3N, ST5N, CANYON_Sef-Tec.pdf",
+                    "name": "2_Страх_привязь_ST2, ST3, ST5, ST6, ST3N, ST5N, CANYON_Sef-Tec",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Страховочная привязь 041,042,043 Высота_Vento",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Привязь страховочная удерживающая УСП IIa ПроВиТекс",
                     "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
                 }
             ]
         },
         "2": {
             "name": "Гибкая анкерная линия",
-            "docs": []
+            "docs": [
+                {
+                    "name": "Линия анкерная гибкая Potencial Анлайн 12 20м 12мм",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                }
+            ]
         },
         "3": {
             "name": "Захват ползункового типа для гибкой анкерной линии",
-            "docs": []
+            "docs": [
+                {
+                    "name": "Устройство позиционирования на канатах типа А Зажим «Лайнблок» Vento",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                }
+            ]
         },
         "4": {
             "name": "Строп удерживающий регулируемый (нерегулируемый)",
-            "docs": []
+            "docs": [
+                {
+                    "name": "Строп предохранительный нерегулируемый Д10 2м с карабинами К-1",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Строп предохранительный регулируемый Д21 2м",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Строп предохранительный нерегулируемый Д10 2м с амортизатором А-3, карабинами К-1, К-7",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Строп предохранительный регулируемый Д21 2м с амортизатором А-3, карабинами К-1, К-7",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Строп предохранительный со специальным механизмом регулировки Д33 с карабинами К-А, К-В",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                }
+            ]
         },
         "5": {
             "name": "Спусковое устройство",
-            "docs": []
+            "docs": [
+                {
+                    "name": "Инструкция RIG",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Процедура осмотра RIG",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Советы по уходу RIG",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                },
+                {
+                    "name": "Бланк проверки RIG",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                }
+            ]
         },
         "6": {
             "name": "Петля анкерная",
-            "docs": []
+            "docs": [
+                {
+                    "name": "Петля крепежная",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                }
+            ]
         },
         "7": {
             "name": "Веревка вспомогательная",
-            "docs": []
+            "docs": [
+                {
+                    "name": "Веревка вспомогательная 7 VENTO",
+                    "url": "https://philosophy.ucsc.edu/news-events/colloquia-conferences/GeneologyofMorals.pdf"
+                }
+            ]
         },
         "8": {
             "name": "Карабин",

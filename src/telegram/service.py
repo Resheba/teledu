@@ -9,6 +9,7 @@ from src.database import DatabaseService
 
 from .services import (
     admin_router,
+    exam_router,
     poll_router,
     registration_router,
     task1_router,
@@ -56,6 +57,7 @@ class Telegram:
             task10_router,
             task11_router,
             task12_router,
+            exam_router,
         )
         await self._bot.set_my_commands(
             commands=[

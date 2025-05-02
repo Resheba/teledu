@@ -1,3 +1,5 @@
+from .exam import exam_router
+from .exam import start as start_exam
 from .task1 import start as start_task1
 from .task1 import task1_router
 from .task2 import start as start_task2
@@ -48,4 +50,6 @@ __all__ = (
     "start_task11",
     "task12_router",
     "start_task12",
+    "exam_router",
+    "start_exam",
 )

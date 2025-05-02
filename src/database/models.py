@@ -60,6 +60,20 @@ class AnswerVideo(Base):
         return f"AnswerVideo(id={self.id}, answer_id={self.answer_id}, video_id={self.video_id!r})"
 
 
+class Exam(Base):
+    __tablename__ = "exam"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey(User.telegram_id, ondelete="CASCADE"),
+        nullable=False,
+    )
+    is_approved: Mapped[bool | None] = mapped_column(Boolean, default=None, nullable=True)
+
+    video1_id: Mapped[str] = mapped_column(nullable=False)
+    video2_id: Mapped[str] = mapped_column(nullable=False)
+
+
 class ChapterAnswerDTO(NamedTuple):
     id: int
     name: str

@@ -1,6 +1,6 @@
 from .admin import router as admin_router
-from .poll import router as poll_router
 from .poll import (
+    exam_router,
     task1_router,
     task2_router,
     task3_router,
@@ -14,6 +14,7 @@ from .poll import (
     task11_router,
     task12_router,
 )
+from .poll import router as poll_router
 from .registration import router as registration_router
 
 __all__ = (
@@ -32,4 +33,5 @@ __all__ = (
     "task10_router",
     "task11_router",
     "task12_router",
+    "exam_router",
 )

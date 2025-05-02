@@ -10,14 +10,6 @@ from src.database.models import ChapterAnswerDTO
 from src.telegram.services.poll.keyboards import EducationChapterCallbackData
 
 
-def _status_to_icon(status: bool | Literal["ON_ACC"] | None) -> str:
-    if status is None:
-        return ""
-    if status == "ON_ACC":
-        return "⌛️"
-    return "✅" if status else "❌"
-
-
 class EducationMenuCallbackData(CallbackData, prefix="edu"): ...
 
 
@@ -32,25 +24,33 @@ class DocsCallbackData(CallbackData, prefix="doc"):
 
 
 class MenuKeyboard:
-    main_keyboard = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [InlineKeyboardButton(text=text, callback_data=callback)]
-            for text, callback in (
-                ("📖 Обучение", EducationMenuCallbackData().pack()),
-                ("📚 Библиотека документов", LibraryCallbackData().pack()),
-                ("✏️ Сдать экзамен", "exam"),
-            )
-        ]
-        + [[InlineKeyboardButton(text="📞 Контакты", url=Settings.instance().CONTACT_URL)]],
-    )
+    @classmethod
+    def main_keyboard(
+        cls,
+        exam_status: bool | Literal["ON_ACC"] | None = None,
+    ) -> InlineKeyboardMarkup:
+        status = "✏️"
+        if exam_status is not None:
+            status = cls._status_to_icon(status=exam_status)
+        return InlineKeyboardMarkup(
+            inline_keyboard=[
+                [InlineKeyboardButton(text=text, callback_data=callback)]
+                for text, callback in (
+                    ("📖 Обучение", EducationMenuCallbackData().pack()),
+                    ("📚 Библиотека документов", LibraryCallbackData().pack()),
+                    (status + " Сдать экзамен", EducationMenuCallbackData().pack() + ":13"),
+                )
+            ]
+            + [[InlineKeyboardButton(text="📞 Контакты", url=Settings.instance().CONTACT_URL)]],
+        )
 
-    @staticmethod
-    def edu_keyboard(chapters: list[ChapterAnswerDTO]) -> InlineKeyboardMarkup:
+    @classmethod
+    def edu_keyboard(cls, chapters: list[ChapterAnswerDTO]) -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup(
             inline_keyboard=[
                 [
                     InlineKeyboardButton(
-                        text=(_status_to_icon(edu.is_approved) + " " + edu.name).strip(),
+                        text=(cls._status_to_icon(edu.is_approved) + " " + edu.name).strip(),
                         callback_data=EducationChapterCallbackData(id=edu.id).pack(),
                     ),
                 ]
@@ -97,3 +97,11 @@ class MenuKeyboard:
                 ],
             ],
         )
+
+    @staticmethod
+    def _status_to_icon(status: bool | Literal["ON_ACC"] | None) -> str:
+        if status is None:
+            return ""
+        if status == "ON_ACC":
+            return "⌛️"
+        return "✅" if status else "❌"

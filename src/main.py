@@ -23,6 +23,7 @@ async def main() -> None:
     await manager.create_all()
 
     db_service: DatabaseService = DatabaseService(manager=manager)
+    DatabaseService.instance = db_service
     await db_service.migrate_chapters(
         chapters_names=sorted_chapters(texts),
     )

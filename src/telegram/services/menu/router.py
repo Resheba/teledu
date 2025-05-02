@@ -19,16 +19,24 @@ router: Router = Router(name="menu")
 @router.message(Command("menu"))
 async def menu_handler(
     message: Message,
+    manager: DatabaseService | None = None,
 ) -> None:
-    await message.answer("Меню", reply_markup=MenuKeyboard.main_keyboard)
+    if manager is None:
+        manager = DatabaseService.instance
+    exam_status = await manager.get_exam_status(user_id=message.chat.id)
+    await message.answer("Меню", reply_markup=MenuKeyboard.main_keyboard(exam_status=exam_status))
 
 
 @router.callback_query(MenuCallbackData.filter())
 async def menu_cb_handler(
     query: CallbackQuery,
+    manager: DatabaseService,
 ) -> None:
     if isinstance(query.message, Message):
-        await query.message.edit_reply_markup(reply_markup=MenuKeyboard.main_keyboard)
+        exam_status = await manager.get_exam_status(user_id=query.message.chat.id)
+        await query.message.edit_reply_markup(
+            reply_markup=MenuKeyboard.main_keyboard(exam_status=exam_status),
+        )
 
 
 @router.callback_query(EducationMenuCallbackData.filter())

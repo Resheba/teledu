@@ -8,6 +8,7 @@ from src.database import DatabaseService
 
 from .keyboards import EducationChapterCallbackData
 from .tasks import (
+    start_exam,
     start_task1,
     start_task2,
     start_task3,
@@ -49,6 +50,9 @@ async def menu_cb_handler(
     texts: Texts,
 ) -> None:
     if not isinstance(query.message, Message):
+        return
+    if callback_data.id == 13:  # noqa: PLR2004
+        await start_exam(query.message, texts=texts, state=state, manager=manager)
         return
     if callback_data.id == 12:  # noqa: PLR2004
         await start_task12(query.message, texts, state, manager)

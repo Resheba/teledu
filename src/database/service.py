@@ -1,29 +1,16 @@
 from collections.abc import Iterable
+from typing import Literal
 
 from alchemynger import AsyncManager
 from sqlalchemy import case, func, insert, select, text, update
 
-from .models import Answer, AnswerVideo, Chapter, ChapterAnswerDTO, User, UserAnswersDTO
+from .models import Answer, AnswerVideo, Chapter, ChapterAnswerDTO, Exam, User, UserAnswersDTO
 
 
 class DatabaseService:
+    instance: AsyncManager
     __slots__ = ("_manager",)
-    # __last_answer_subquery = (
-    #     select(func.coalesce(Answer.is_approved, "ON_ACC"))
-    #     .where(
-    #         Answer.chapter_id == Chapter.id,
-    #         Answer.user_id == bindparam("user_id"),
-    #     )
-    #     .order_by(Answer.id.desc())
-    #     .limit(1)
-    #     .scalar_subquery()
-    # )
 
-    # __user_answers_subquery = select(
-    #     Chapter.id.label("chapter_id"),
-    #     Chapter.name.label("chapter_name"),
-    #     __last_answer_subquery.label("is_approved"),
-    # )
     __user_answers_subquery = text("""SELECT
         c.id AS chapter_id,
         c.name AS chapter_name,
@@ -79,14 +66,48 @@ class DatabaseService:
             await session.refresh(answer)
         return answer
 
+    async def get_exam_status(self, user_id: int) -> bool | Literal["ON_ACC"] | None:
+        async with self._manager.get_session() as session:
+            response = await session.execute(
+                select(Exam.is_approved).where(
+                    Exam.user_id == user_id,
+                ),
+            )
+            result: tuple[None] | None | tuple[bool] = response.one_or_none()
+            if result is None:
+                return None
+            if result == (None,):
+                return "ON_ACC"
+            return result[0]
+
+    async def create_exam_answer(self, user_id: int, video1_id: str, video2_id: str) -> Exam:
+        exam: Exam = Exam(user_id=user_id, video1_id=video1_id, video2_id=video2_id)
+        async with self._manager.get_session() as session:
+            existed_exam_id: int | None = (
+                await session.execute(
+                    select(Exam.id).where(
+                        Exam.user_id == user_id,
+                    ),
+                )
+            ).scalar_one_or_none()
+            if existed_exam_id is not None:
+                await session.execute(
+                    self._manager[Exam].delete.where(Exam.id == existed_exam_id),
+                )
+                exam.id = existed_exam_id
+            session.add(exam)
+            await session.commit()
+            await session.refresh(exam)
+        return exam
+
     async def get_user_chapter_answers(self, user_id: int) -> list[ChapterAnswerDTO]:
         async with self._manager.get_session() as session:
             result = await session.execute(self.__user_answers_subquery, {"user_id": user_id})
             return UserAnswersDTO.validate_python(map(tuple, result.all()))
 
-    async def is_user_completed_all_chapters(self, user_id: int) -> bool:
+    async def is_user_completed_all_chapters(self, user_id: int, *, count: int = 11) -> bool:
         cond = case(
-            (func.count(Answer.id) >= 11, True),  # noqa: PLR2004
+            (func.count(Answer.id) >= count, True),
             else_=False,
         )
 
