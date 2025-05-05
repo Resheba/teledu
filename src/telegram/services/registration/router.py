@@ -1,7 +1,7 @@
 from asyncio import sleep
 
 from aiogram import Router
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from loguru import logger
@@ -16,7 +16,7 @@ from .utils import valid_email, valid_name, valid_number
 router: Router = Router(name="registration")
 
 
-@router.message(CommandStart())
+@router.message(CommandStart(), StateFilter(None))
 async def start_command(
     message: Message,
     state: FSMContext,

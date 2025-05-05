@@ -1,5 +1,5 @@
 from aiogram import Router
-from aiogram.filters import Command
+from aiogram.filters import Command, StateFilter
 from aiogram.types import CallbackQuery, Message
 
 from src.config import Texts
@@ -16,7 +16,7 @@ from .keyboards import (
 router: Router = Router(name="menu")
 
 
-@router.message(Command("menu"))
+@router.message(Command("menu"), StateFilter(None))
 async def menu_handler(
     message: Message,
     manager: DatabaseService | None = None,
