@@ -124,6 +124,22 @@ class DatabaseService:
         stmt = self._manager[Answer].update.where(Answer.id == answer_id).values(is_approved=True)
         await self._manager.execute(stmt, commit=True)
 
+    async def get_users_with_answer_count(self) -> list[tuple[User, int]]:
+        stmt = (
+            self._manager[User, func.count(Answer.id)]
+            .select.join(
+                Answer,
+                User.telegram_id == Answer.user_id,
+            )
+            .where(Answer.is_approved.is_(None))
+            .group_by(User.telegram_id)
+            .order_by(User.telegram_id)
+        )
+        async with self._manager.get_session() as session:
+            result = await session.execute(stmt)
+            data: list[tuple[User, int]] = result.all()
+            return data
+
     # async def get_answer(self, answer_id: int) -> Answer | None:
     #     stmt = self._manager[Answer].select.where(Answer.id == answer_id)
     #     result: list[Answer] = await self._manager.execute(stmt)

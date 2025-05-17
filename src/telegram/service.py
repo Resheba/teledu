@@ -63,6 +63,7 @@ class Telegram:
             commands=[
                 BotCommand(command="/start", description="Start"),
                 BotCommand(command="/menu", description="Menu"),
+                BotCommand(command="/approves", description="Approves"),
             ],
         )
         await self._dispatcher.start_polling(
