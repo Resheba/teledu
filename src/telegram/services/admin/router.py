@@ -2,17 +2,26 @@ from typing import TYPE_CHECKING
 
 from aiogram import Router
 from aiogram.filters import Command, StateFilter
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import CallbackQuery, InputMediaVideo, Message
 
 from src.database import DatabaseService
 
-from .keyboards import AdminKeyboard, ApproveCallbackData, ApproveUserCallbackData
+from .filters import IsAdmin
+from .keyboards import (
+    AdminKeyboard,
+    AnswerCallbackData,
+    ApproveAnswerCallbackData,
+    ApproveCallbackData,
+    ApproveUserCallbackData,
+)
 
 if TYPE_CHECKING:
     from src.database.models import User
 
 
 router: Router = Router(name="admin")
+router.message.filter(IsAdmin())
+router.callback_query.filter(IsAdmin())
 
 
 @router.message(Command("approves"), StateFilter(None))
@@ -51,11 +60,61 @@ async def user_answers_callback_handler(
         user = await manager.get_user(callback_data.user_id)
         if user is None:
             return
-        answers = await manager.get_user_chapter_answers(callback_data.user_id)
+        answers = await manager.get_user_unapproved_answers(callback_data.user_id)
         await query.message.edit_text(
             f"Ответы пользователя <b>{user.name}</b>",
             parse_mode="HTML",
             reply_markup=AdminKeyboard.user_unapproved_keyboard(
-                answer for answer in answers if answer.is_approved == "ON_ACC"
+                answers=answers,
             ),
         )
+
+
+@router.callback_query(AnswerCallbackData.filter())
+async def answer_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: AnswerCallbackData,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+
+    answers = await manager.get_answer(callback_data.answer_id)
+    if answers is None:
+        await query.answer("Ответ не найден", show_alert=True)
+        return
+    if not answers.videos:
+        await query.answer("Ответ пустой", show_alert=True)
+        return
+    await query.message.reply_media_group(
+        media=[InputMediaVideo(media=video.video_id) for video in answers.videos],
+    )
+    await query.message.answer(
+        text=answers.chapter.name,
+        reply_markup=AdminKeyboard.answer_keyboard(answers.id, answers.user_id),
+    )
+    await query.message.delete_reply_markup()
+
+
+@router.callback_query(ApproveAnswerCallbackData.filter())
+async def approve_answer_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ApproveAnswerCallbackData,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+
+    if callback_data.is_approved is True:
+        await manager.approve_answer(callback_data.answer_id)
+        await query.answer("✅ Ответ одобрен!")
+    else:
+        await manager.unapprove_answer(callback_data.answer_id)
+        await query.answer("❌ Ответ отклонен!")
+
+    await query.message.delete_reply_markup()
+    await user_answers_callback_handler(
+        query,
+        manager,
+        ApproveUserCallbackData(user_id=callback_data.user_id),
+    )

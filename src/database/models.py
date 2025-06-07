@@ -40,7 +40,8 @@ class Answer(Base):
     )
     is_approved: Mapped[bool | None] = mapped_column(Boolean, default=None, nullable=True)
 
-    videos: Mapped[list["AnswerVideo"]] = relationship(passive_deletes=True)
+    videos: Mapped[list["AnswerVideo"]] = relationship()
+    chapter: Mapped["Chapter"] = relationship()
 
     def __repr__(self) -> str:
         return f"Answer(id={self.id}, is_approved={self.is_approved})"
@@ -89,4 +90,10 @@ class ChapterAnswerDTO(NamedTuple):
         return bool(value)
 
 
+class UnapprovedAnswerDTO(NamedTuple):
+    answer_id: int
+    chapter_name: str
+
+
 UserAnswersDTO = TypeAdapter(list[ChapterAnswerDTO])
+UnapprovedAnswersDTO = TypeAdapter(list[UnapprovedAnswerDTO])

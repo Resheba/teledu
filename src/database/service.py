@@ -1,10 +1,21 @@
 from collections.abc import Iterable
-from typing import Literal
+from typing import Literal, cast
 
 from alchemynger import AsyncManager
 from sqlalchemy import case, func, insert, select, text, update
+from sqlalchemy.orm import selectinload
 
-from .models import Answer, AnswerVideo, Chapter, ChapterAnswerDTO, Exam, User, UserAnswersDTO
+from .models import (
+    Answer,
+    AnswerVideo,
+    Chapter,
+    ChapterAnswerDTO,
+    Exam,
+    UnapprovedAnswerDTO,
+    UnapprovedAnswersDTO,
+    User,
+    UserAnswersDTO,
+)
 
 
 class DatabaseService:
@@ -105,6 +116,24 @@ class DatabaseService:
             result = await session.execute(self.__user_answers_subquery, {"user_id": user_id})
             return UserAnswersDTO.validate_python(map(tuple, result.all()))
 
+    async def get_user_unapproved_answers(self, user_id: int) -> list[UnapprovedAnswerDTO]:
+        stmt = (
+            self._manager[Answer.id, Chapter.name]
+            .select.select_from(Answer)
+            .join(
+                Chapter,
+                Chapter.id == Answer.chapter_id,
+            )
+            .where(
+                Answer.user_id == user_id,
+                Answer.is_approved.is_(None),
+            )
+            .group_by(Answer.chapter_id)
+        )
+        async with self._manager.get_session() as session:
+            result = await session.execute(stmt)
+            return UnapprovedAnswersDTO.validate_python(map(tuple, result.all()))
+
     async def is_user_completed_all_chapters(self, user_id: int, *, count: int = 11) -> bool:
         cond = case(
             (func.count(Answer.id) >= count, True),
@@ -124,6 +153,10 @@ class DatabaseService:
         stmt = self._manager[Answer].update.where(Answer.id == answer_id).values(is_approved=True)
         await self._manager.execute(stmt, commit=True)
 
+    async def unapprove_answer(self, answer_id: int) -> None:
+        stmt = self._manager[Answer].update.where(Answer.id == answer_id).values(is_approved=False)
+        await self._manager.execute(stmt, commit=True)
+
     async def get_users_with_answer_count(self) -> list[tuple[User, int]]:
         stmt = (
             self._manager[User, func.count(Answer.id)]
@@ -140,16 +173,19 @@ class DatabaseService:
             data: list[tuple[User, int]] = result.all()
             return data
 
-    # async def get_answer(self, answer_id: int) -> Answer | None:
-    #     stmt = self._manager[Answer].select.where(Answer.id == answer_id)
-    #     result: list[Answer] = await self._manager.execute(stmt)
-    #     if not result:
-    #         return None
-    #     return result[0]
-
-    # async def approve_answer(self, answer_id: int) -> None:
-    #     stmt = self._manager[Answer].update.where(Answer.id == answer_id).values(is_approved=True)
-    #     await self._manager.execute(stmt, commit=True)
+    async def get_answer(self, answer_id: int) -> Answer | None:
+        async with self._manager.get_session() as session:
+            return cast(
+                Answer,
+                await session.get(
+                    Answer,
+                    answer_id,
+                    options=(
+                        selectinload(Answer.videos),
+                        selectinload(Answer.chapter),
+                    ),
+                ),
+            )
 
     # async def reject_answer(self, answer_id: int) -> None:
     #     stmt = self._manager[Answer].delete.where(Answer.id == answer_id)

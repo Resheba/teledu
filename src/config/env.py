@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     TELEGRAM_TOKEN: str = ""
     TEXTS_PATH: str = "resources/texts.json"
     CONTACT_URL: str = ""
+    ADMIN_IDS: list[int] = []
 
     @classmethod
     @cache

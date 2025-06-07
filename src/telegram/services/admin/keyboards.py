@@ -3,7 +3,7 @@ from collections.abc import Iterable
 from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-from src.database.models import ChapterAnswerDTO, User
+from src.database.models import UnapprovedAnswerDTO, User
 
 
 class ApproveCallbackData(CallbackData, prefix="appr"):
@@ -18,15 +18,21 @@ class AnswerCallbackData(CallbackData, prefix="ans"):
     answer_id: int
 
 
+class ApproveAnswerCallbackData(CallbackData, prefix="ansappr"):
+    user_id: int
+    answer_id: int
+    is_approved: bool
+
+
 class AdminKeyboard:
     @staticmethod
-    def user_unapproved_keyboard(answers: Iterable[ChapterAnswerDTO]) -> InlineKeyboardMarkup:
+    def user_unapproved_keyboard(answers: Iterable[UnapprovedAnswerDTO]) -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup(
             inline_keyboard=[
                 [
                     InlineKeyboardButton(
-                        text="📍 " + answer.name,
-                        callback_data=AnswerCallbackData(answer_id=answer.id).pack(),
+                        text="📍 " + answer.chapter_name,
+                        callback_data=AnswerCallbackData(answer_id=answer.answer_id).pack(),
                     ),
                 ]
                 for answer in answers
@@ -67,4 +73,31 @@ class AdminKeyboard:
             )
         return InlineKeyboardMarkup(
             inline_keyboard=[*results, helpers],
+        )
+
+    @staticmethod
+    def answer_keyboard(answer_id: int, user_id: int) -> InlineKeyboardMarkup:
+        return InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(
+                        text="✅",
+                        callback_data=ApproveAnswerCallbackData(
+                            answer_id=answer_id,
+                            is_approved=True,
+                            user_id=user_id,
+                        ).pack(),
+                    ),
+                ],
+                [
+                    InlineKeyboardButton(
+                        text="❌",
+                        callback_data=ApproveAnswerCallbackData(
+                            answer_id=answer_id,
+                            is_approved=False,
+                            user_id=user_id,
+                        ).pack(),
+                    ),
+                ],
+            ],
         )
