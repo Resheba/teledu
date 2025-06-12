@@ -106,6 +106,11 @@ class Edu11(EduBase):
 
 class Edu12(EduBase):
     form_1: Form
+    form_2: Form
+
+
+class Edu13(EduBase):
+    form_1: Form
 
 
 class Education(BaseModel):
@@ -124,6 +129,7 @@ class Education(BaseModel):
     edu10: Edu10 = Field(alias="10")
     edu11: Edu11 = Field(alias="11")
     edu12: Edu12 = Field(alias="12")
+    edu13: Edu13 = Field(alias="13")
 
     @property
     def all(self) -> tuple[EduBase, ...]:
@@ -140,6 +146,7 @@ class Education(BaseModel):
             self.edu10,
             self.edu11,
             self.edu12,
+            self.edu13,
         )
 
 

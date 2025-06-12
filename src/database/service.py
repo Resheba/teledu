@@ -134,7 +134,7 @@ class DatabaseService:
             result = await session.execute(stmt)
             return UnapprovedAnswersDTO.validate_python(map(tuple, result.all()))
 
-    async def is_user_completed_all_chapters(self, user_id: int, *, count: int = 11) -> bool:
+    async def is_user_completed_all_chapters(self, user_id: int, *, count: int = 12) -> bool:
         cond = case(
             (func.count(Answer.id) >= count, True),
             else_=False,

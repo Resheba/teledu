@@ -21,6 +21,7 @@ from .tasks import (
     start_task10,
     start_task11,
     start_task12,
+    start_task13,
 )
 
 router: Router = Router(name="poll")
@@ -38,6 +39,7 @@ _starts = {
     9: start_task9,
     10: start_task10,
     11: start_task11,
+    12: start_task12,
 }
 
 
@@ -51,11 +53,11 @@ async def menu_cb_handler(
 ) -> None:
     if not isinstance(query.message, Message):
         return
-    if callback_data.id == 13:  # noqa: PLR2004
+    if callback_data.id == 14:  # noqa: PLR2004
         await start_exam(query.message, texts=texts, state=state, manager=manager)
         return
-    if callback_data.id == 12:  # noqa: PLR2004
-        await start_task12(query.message, texts, state, manager)
+    if callback_data.id == 13:  # noqa: PLR2004
+        await start_task13(query.message, texts, state, manager)
         return
     if callback_data.id not in _starts:
         return

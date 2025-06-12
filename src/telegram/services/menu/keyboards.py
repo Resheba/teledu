@@ -38,7 +38,7 @@ class MenuKeyboard:
                 for text, callback in (
                     ("📖 Обучение", EducationMenuCallbackData().pack()),
                     ("📚 Библиотека документов", LibraryCallbackData().pack()),
-                    (status + " Сдать экзамен", EducationMenuCallbackData().pack() + ":13"),
+                    (status + " Сдать экзамен", EducationMenuCallbackData().pack() + ":14"),
                 )
             ]
             + [[InlineKeyboardButton(text="📞 Контакты", url=Settings.instance().CONTACT_URL)]],

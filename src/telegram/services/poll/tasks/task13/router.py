@@ -8,47 +8,34 @@ from src.telegram.services.menu.router import menu_handler
 from src.telegram.services.poll.states import TasksStateGroup
 from src.telegram.services.poll.utils import send
 
-from .keyboards import Task12CallbackData
+from .keyboards import Task13CallbackData
 
-router: Router = Router(name="task12")
+router: Router = Router(name="task13")
 
 
 async def start(
     message: Message,
     texts: Texts,
     state: FSMContext,
+    manager: DatabaseService,
 ) -> None:
-    await state.set_state(TasksStateGroup.edu12)
+    if not (await manager.is_user_completed_all_chapters(message.chat.id)):
+        await message.answer(
+            "Вы не прошли все задания.\nПожалуйста, пройдите их или дождитесь проверки.",
+        )
+        return
+    await state.set_state(TasksStateGroup.edu13)
     await send(
         message=message,
-        form=texts.education.edu12.form_1,
+        form=texts.education.edu13.form_1,
         reply_button_text=texts.education.next_button_text,
-        callback_data=Task12CallbackData(form=2).pack(),
+        callback_data=Task13CallbackData(form=2).pack(),
     )
 
 
 @router.callback_query(
-    TasksStateGroup.edu12,
-    Task12CallbackData.filter(F.form == 2),  # noqa: PLR2004
-)
-async def form2(
-    query: CallbackQuery,
-    callback_data: Task12CallbackData,
-    texts: Texts,
-) -> None:
-    if not isinstance(query.message, Message):
-        return
-    await send(
-        message=query.message,
-        form=texts.education.edu12.form_2,
-        reply_button_text=texts.education.next_button_text,
-        callback_data=Task12CallbackData(form=callback_data.form + 1).pack(),
-    )
-
-
-@router.callback_query(
-    TasksStateGroup.edu12,
-    Task12CallbackData.filter(F.form == 3),  # noqa: PLR2004
+    TasksStateGroup.edu13,
+    Task13CallbackData.filter(F.form == 2),  # noqa: PLR2004
 )
 async def end(
     query: CallbackQuery,
@@ -61,7 +48,7 @@ async def end(
     await state.clear()
     answer = await manager.create_answer(
         user_id=query.message.chat.id,
-        chapter_id=12,
+        chapter_id=13,
         videos=[],
     )
     await manager.approve_answer(answer.id)
