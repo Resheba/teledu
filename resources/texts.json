@@ -31,15 +31,15 @@
                 "text": "После просмотра роликов я попрошу тебе пошагово повторить и записать видео как ты это делаешь. Я помогу тебе. У нас все получиться"
             },
             "form_4": {
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ",
+                "video_id": "BAACAgIAAxkBAAIH2mhLJl4Ld95ZCIHVjHsROjBMCIjPAAIqfwACC6tYSgABJTc0hVTrgDYE",
                 "text": "Страховка с узлом Маршара"
             },
             "form_5": {
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ",
+                "video_id": "BAACAgIAAxkBAAIH3WhLKS3beyNNawS0IPDZTMQ1JYdsAAJGfwACC6tYSqlczm7VKKXrNgQ",
                 "text": "Страховка с RIG"
             },
             "form_6": {
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ",
+                "video_id": "BAACAgIAAxkBAAIH32hLKc9loq9RV_cYozaAIGsSeWP4AAJ5fgACyE1ZSsS5MgHzzPdNNgQ",
                 "text": "Страховка с Косичкой"
             },
             "form_7": {
@@ -56,10 +56,22 @@
                 "text": "Посмотрим ролик как одевают страховочную привязь. Потом прочти инструкцию по эксплуатации на свою страховочную привязь. После прочтения одень на себя страховочную привязь. Отрегулируй ее на себе, найди страховочные точки, точки для позиционирования и индикаторы срыва. Когда изучишь страховочную привязь, то попроси коллегу снять короткое видео, на котором видно, как ты одеваешь страховочную привязь. Это видео отправь на проверку."
             },
             "form_2": {
-                "text": "Страховочная привязь",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "text": "Страховочная привязь 1",
+                "video_id": "BAACAgIAAxkBAAIH82hLKnqaqwS8U6bi6cfDrV-bJz1UAAJOfwACC6tYSp1bN87cQippNgQ"
             },
             "form_3": {
+                "text": "Страховочная привязь 2",
+                "video_id": "BAACAgIAAxkBAAIH92hLK5FN0WOaKcMtxYITsF0z5pSfAAJpfwACC6tYSiT2kzADy6qyNgQ"
+            },
+            "form_4": {
+                "text": "Страховочная привязь 3",
+                "video_id": "BAACAgIAAxkBAAIH9WhLK5GiLVdmdqjUMFYoDvpXrlloAAJnfwACC6tYSq9VsN1iQVf7NgQ"
+            },
+            "form_5": {
+                "text": "Страховочная привязь 4",
+                "video_id": "BAACAgIAAxkBAAIH9mhLK5EXrrtSw-1ykECN3hDj8yMpAAJofwACC6tYSvq1vgEsypvwNgQ"
+            },
+            "form_6": {
                 "text": "Отправь видео на проверку"
             }
         },
@@ -71,7 +83,7 @@
             },
             "form_2": {
                 "text": "Снаряжение",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIH-GhLK5jlrXVW7K-NTAvAV0vEBhEPAAJrfwACC6tYSv2BZqnBFWpUNgQ"
             },
             "form_3": {
                 "text": "Отправь видео на проверку"
@@ -88,7 +100,7 @@
             },
             "form_3": {
                 "text": "Узел Восьмерка",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIEWhLL5Gxp2yvmzHwFU5Il3F16BrZAAK-fwACC6tYSlcbOEhItH2HNgQ"
             },
             "form_4": {
                 "text": "Отправь видео на проверку"
@@ -98,7 +110,7 @@
             },
             "form_6": {
                 "text": "Узел Грейпвайн",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIN2hLMvqU8k6GDyBe6Dl2JXaiOIRzAALgfwACC6tYSpjaBA9x7XDHNgQ"
             },
             "form_7": {
                 "text": "Отправь видео на проверку"
@@ -108,7 +120,7 @@
             },
             "form_9": {
                 "text": "Узел Маршара",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIOGhLNBQehBNFrzITqax1_hoGBqftAALnfwACC6tYSi0kDAjdCPI3NgQ"
             },
             "form_10": {
                 "text": "Отправь видео на проверку"
@@ -118,7 +130,7 @@
             },
             "form_12": {
                 "text": "Узел Австрийский проводник",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIOWhLNBSqb2stW-7_aDqXpuDMmqLwAAIPfwACyE1ZSvgES79WINUeNgQ"
             },
             "form_13": {
                 "text": "Отправь видео на проверку"
@@ -128,7 +140,7 @@
             },
             "form_15": {
                 "text": "Узел Булинь",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIOmhLNQlxwH8AAf_DLS0-iJrnJKTH7AAC_38AAgurWErjMlfXJWdZKDYE"
             },
             "form_16": {
                 "text": "Отправь видео на проверку"

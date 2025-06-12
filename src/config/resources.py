@@ -35,6 +35,9 @@ class Edu2(EduBase):
     form_1: Form
     form_2: Form
     form_3: Form
+    form_4: Form
+    form_5: Form
+    form_6: Form
 
 
 class Edu3(EduBase):

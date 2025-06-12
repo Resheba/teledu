@@ -56,6 +56,63 @@ async def form2(
 )
 async def form3(
     query: CallbackQuery,
+    callback_data: Task2CallbackData,
+    texts: Texts,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+    await send(
+        message=query.message,
+        form=texts.education.edu2.form_3,
+        reply_button_text=texts.education.next_button_text,
+        callback_data=Task2CallbackData(form=callback_data.form + 1).pack(),
+    )
+
+
+@router.callback_query(
+    TasksStateGroup.edu2,
+    Task2CallbackData.filter(F.form == 4),  # noqa: PLR2004
+)
+async def form4(
+    query: CallbackQuery,
+    callback_data: Task2CallbackData,
+    texts: Texts,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+    await send(
+        message=query.message,
+        form=texts.education.edu2.form_4,
+        reply_button_text=texts.education.next_button_text,
+        callback_data=Task2CallbackData(form=callback_data.form + 1).pack(),
+    )
+
+
+@router.callback_query(
+    TasksStateGroup.edu2,
+    Task2CallbackData.filter(F.form == 5),  # noqa: PLR2004
+)
+async def form5(
+    query: CallbackQuery,
+    callback_data: Task2CallbackData,
+    texts: Texts,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+    await send(
+        message=query.message,
+        form=texts.education.edu2.form_5,
+        reply_button_text=texts.education.next_button_text,
+        callback_data=Task2CallbackData(form=callback_data.form + 1).pack(),
+    )
+
+
+@router.callback_query(
+    TasksStateGroup.edu2,
+    Task2CallbackData.filter(F.form == 6),  # noqa: PLR2004
+)
+async def form6(
+    query: CallbackQuery,
     state: FSMContext,
     texts: Texts,
 ) -> None:
@@ -64,7 +121,7 @@ async def form3(
 
     await query.message.delete_reply_markup()
     await query.message.answer(
-        text=texts.education.edu2.form_3.text,
+        text=texts.education.edu2.form_6.text,
         reply_markup=ReplyKeyboardMarkup(
             keyboard=[
                 [KeyboardButton(text="Отмена")],
@@ -98,7 +155,7 @@ async def video(
                 [
                     InlineKeyboardButton(
                         text=texts.education.next_button_text,
-                        callback_data=Task2CallbackData(form=4).pack(),
+                        callback_data=Task2CallbackData(form=7).pack(),
                     ),
                 ],
             ],
@@ -108,7 +165,7 @@ async def video(
 
 @router.callback_query(
     TasksStateGroup.edu2,
-    Task2CallbackData.filter(F.form == 4),  # noqa: PLR2004
+    Task2CallbackData.filter(F.form == 7),  # noqa: PLR2004
 )
 async def end(
     query: CallbackQuery,

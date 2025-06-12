@@ -62,3 +62,8 @@ async def menu_cb_handler(
     if callback_data.id not in _starts:
         return
     await _starts[callback_data.id](query.message, texts, state)
+
+
+# @router.message()
+# async def test(message: Message) -> None:
+#     print(message.video)
