@@ -1,70 +1,69 @@
-from asyncio import sleep as asleep
-
-from aiogram import F, Router
+from aiogram import Router
+from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
-from aiogram.types import InputMediaVideo, Message
-from loguru import logger
+from aiogram.types import CallbackQuery, Message
 
-from src.config import Settings
+from src.config import Texts
 from src.database import DatabaseService
 
-from .states import PollStateGroup
-from .utils import valid_answer
+from .keyboards import EducationChapterCallbackData
+from .tasks import (
+    start_exam,
+    start_task1,
+    start_task2,
+    start_task3,
+    start_task4,
+    start_task5,
+    start_task6,
+    start_task7,
+    start_task8,
+    start_task9,
+    start_task10,
+    start_task11,
+    start_task12,
+    start_task13,
+)
 
 router: Router = Router(name="poll")
 
 
-async def start_poll(
-    message: Message,
-    settings: Settings,
+_starts = {
+    1: start_task1,
+    2: start_task2,
+    3: start_task3,
+    4: start_task4,
+    5: start_task5,
+    6: start_task6,
+    7: start_task7,
+    8: start_task8,
+    9: start_task9,
+    10: start_task10,
+    11: start_task11,
+    12: start_task12,
+}
+
+
+@router.callback_query(EducationChapterCallbackData.filter(), StateFilter(None))
+async def menu_cb_handler(
+    query: CallbackQuery,
+    callback_data: EducationChapterCallbackData,
     state: FSMContext,
+    manager: DatabaseService,
+    texts: Texts,
 ) -> None:
-    await message.answer(
-        "Я приготовил для тебе два видеоролика как надо безопасно работать на высоте на "
-        "опоре с использованием приставной лестницы. Их надо посмотреть.",
-    )
-    await asleep(1)
-    await message.answer(
-        "После просмотра роликов я попрошу тебя пошагово повторить и записать "
-        "видео как ты это делаешь. Я помогу тебе. У нас все получиться.",
-    )
-    await asleep(1)
-    await message.answer_media_group(
-        media=[InputMediaVideo(media=media_id) for media_id in settings.VIDEO_IDS],
-    )
-    await state.set_state(PollStateGroup.overview)
-    await asleep(1)
-    await message.answer(
-        "Теперь давайте повторим пройденный материал. "
-        "Пожалуйста, напишите, что вы поняли из видео.",
-    )
-
-
-@router.message(PollStateGroup.overview)
-async def poll_overview(message: Message, state: FSMContext) -> None:
-    if not message.text or not valid_answer(message.text or ""):
-        await message.answer("Пожалуйста, напишите, что вы поняли из видео.")
+    if not isinstance(query.message, Message):
         return
-    await state.update_data(text_answer=message.text)
-    await message.answer("Отлично! Теперь попробуйте выполнить следующее задание.")
-    await asleep(1)
-    await message.answer("Запишите видео с вашим исполнением задания.")
-    await state.set_state(PollStateGroup.video)
+    if callback_data.id == 14:  # noqa: PLR2004
+        await start_exam(query.message, texts=texts, state=state, manager=manager)
+        return
+    if callback_data.id == 13:  # noqa: PLR2004
+        await start_task13(query.message, texts, state, manager)
+        return
+    if callback_data.id not in _starts:
+        return
+    await _starts[callback_data.id](query.message, texts, state)
 
 
-@router.message(PollStateGroup.video, F.video | F.text)
-async def poll_video(message: Message, state: FSMContext, manager: DatabaseService) -> None:
-    if message.from_user is None:  # bot check
-        await state.clear()
-        return
-    if not message.video:
-        await message.answer("Пожалуйста, отправьте видео.")
-        return
-    await manager.create_answer(
-        user_id=message.from_user.id,
-        text_answer=await state.get_value("text_answer", ""),
-        video_answer_id=message.video.file_id,
-    )
-    logger.info(f"User {message.from_user.id} completed poll.")
-    await message.answer("Ваша работа отправлена на проверку! Мы свяжемся с вами скоро.")
-    await state.clear()
+# @router.message()
+# async def test(message: Message) -> None:
+#     print(message.video)

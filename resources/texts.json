@@ -1,0 +1,435 @@
+{
+    "registration": {
+        "image_id": "AgACAgIAAxkBAAIDXGfu27xVvUHzXU_e-PT90Dg86k6CAAK28zEb3UVwS7_kSWObbhdtAQADAgADeQADNgQ",
+        "form_1": {
+            "text": "Привет! Это чат - бот для обучения безопасности работ на опорах воздушных линиях связи с использованием приставных лестниц!\n\nМеня зовут Лестничный Гуру."
+        },
+        "form_2": {
+            "text": "Как вас зовут?"
+        },
+        "form_3": {
+            "text": "Пожалуйста, зарегистрируйтесь, указав свою электронную почту или телефон."
+        },
+        "form_4": {
+            "text": "Вы успешно зарегистрированы!"
+        }
+    },
+    "education": {
+        "next_button_text": "Далее",
+        "watch_button_text": "Начать просмотр",
+        "1": {
+            "id": 1,
+            "main_button_text": "Начать",
+            "delay_sec": 2,
+            "form_1": {
+                "text": "Примерно 25 процентов всех несчастных случаев происходит из – за падения с высоты. Законодательно установлено, что при проведении работ на высоте необходимо использовать страховочную и эвакуационную системы. Страховочную для того, чтобы во время подъема, спуска и работы на высоте работник не упал. Эвакуационную для того, чтобы в случае чрезвычайной ситуации на высоте, его могли другие работники как можно быстрее эвакуировать."
+            },
+            "form_2": {
+                "text": "Я приготовил для тебе видеоролики как надо безопасно работать на высоте на опоре с использованием приставной лестницы. Их надо посмотреть. Вариантов обеспечения безопасности работ несколько – они все правильные, но могут использоваться в зависимости от наличия снаряжения и ситуации"
+            },
+            "form_3": {
+                "text": "После просмотра роликов я попрошу тебе пошагово повторить и записать видео как ты это делаешь. Я помогу тебе. У нас все получиться"
+            },
+            "form_4": {
+                "video_id": "BAACAgIAAxkBAAIH2mhLJl4Ld95ZCIHVjHsROjBMCIjPAAIqfwACC6tYSgABJTc0hVTrgDYE",
+                "text": "Страховка с узлом Маршара"
+            },
+            "form_5": {
+                "video_id": "BAACAgIAAxkBAAIH3WhLKS3beyNNawS0IPDZTMQ1JYdsAAJGfwACC6tYSqlczm7VKKXrNgQ",
+                "text": "Страховка с RIG"
+            },
+            "form_6": {
+                "video_id": "BAACAgIAAxkBAAIH32hLKc9loq9RV_cYozaAIGsSeWP4AAJ5fgACyE1ZSsS5MgHzzPdNNgQ",
+                "text": "Страховка с Косичкой"
+            },
+            "form_7": {
+                "text": "Теперь нам надо поэтапно отработать практические навыки по обеспечению безопасности при проведении работ на опоре с использованием приставной лестницы.\nНам надо научиться вязать узлы, одевать страховочную привязь, ставить лестницу к опоре и собирать на ней страховочную и эвакуационную систему.\nВ разделе документы на компоненты системы я разместил для тебя инструкции по эксплуатации. Их необходимо изучить. Это можно делать в процессе практики. Если не найдешь там что – то на свое оборудование, то ищи у себя в подразделении."
+            },
+            "form_8": {
+                "text": "С начала мы изучим как одевать страховочную привязь и строп для позиционирования. Узнаем о страховочном снаряжении и научимся вязать узлы. Приготовь страховочную привязь, строп для позиционирования, карабины, анкерную линию, устройство ползункового типа, спусковое устройство RIG. А также веревку, для вязания узлов: репшнур диаметр 7 мм."
+            }
+        },
+        "2": {
+            "id": 2,
+            "main_button_text": "Страховочная привязь",
+            "form_1": {
+                "text": "Посмотрим ролик как одевают страховочную привязь. Потом прочти инструкцию по эксплуатации на свою страховочную привязь. После прочтения одень на себя страховочную привязь. Отрегулируй ее на себе, найди страховочные точки, точки для позиционирования и индикаторы срыва. Когда изучишь страховочную привязь, то попроси коллегу снять короткое видео, на котором видно, как ты одеваешь страховочную привязь. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Страховочная привязь 1",
+                "video_id": "BAACAgIAAxkBAAIH82hLKnqaqwS8U6bi6cfDrV-bJz1UAAJOfwACC6tYSp1bN87cQippNgQ"
+            },
+            "form_3": {
+                "text": "Страховочная привязь 2",
+                "video_id": "BAACAgIAAxkBAAIH92hLK5FN0WOaKcMtxYITsF0z5pSfAAJpfwACC6tYSiT2kzADy6qyNgQ"
+            },
+            "form_4": {
+                "text": "Страховочная привязь 3",
+                "video_id": "BAACAgIAAxkBAAIH9WhLK5GiLVdmdqjUMFYoDvpXrlloAAJnfwACC6tYSq9VsN1iQVf7NgQ"
+            },
+            "form_5": {
+                "text": "Страховочная привязь 4",
+                "video_id": "BAACAgIAAxkBAAIH9mhLK5EXrrtSw-1ykECN3hDj8yMpAAJofwACC6tYSvq1vgEsypvwNgQ"
+            },
+            "form_6": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "3": {
+            "id": 3,
+            "main_button_text": "Снаряжение",
+            "form_1": {
+                "text": "Посмотри ролик о применяемом страховочном снаряжении. После просмотра почитай инструкции по эксплуатации на используемое снаряжение. Когда изучишь страховочное снаряжение, то попроси коллегу снять короткое видео, на котором видно, как ты крепишь строп для позиционирования. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Снаряжение",
+                "video_id": "BAACAgIAAxkBAAIH-GhLK5jlrXVW7K-NTAvAV0vEBhEPAAJrfwACC6tYSv2BZqnBFWpUNgQ"
+            },
+            "form_3": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "4": {
+            "id": 4,
+            "main_button_text": "Узлы",
+            "form_1": {
+                "text": "В нашей системе страховки и эвакуации необходим навык завязывания узлов. Поэтому в этом разделе мы изучим узлы."
+            },
+            "form_2": {
+                "text": "Посмотри ролик как завязывается узел «Восьмерка». Потом завяжи его самостоятельно. Когда научишься вязать узел, то попроси коллегу снять короткое видео, на котором видно, как ты его завязываешь. Это видео отправь на проверку."
+            },
+            "form_3": {
+                "text": "Узел Восьмерка",
+                "video_id": "BAACAgIAAxkBAAIIEWhLL5Gxp2yvmzHwFU5Il3F16BrZAAK-fwACC6tYSlcbOEhItH2HNgQ"
+            },
+            "form_4": {
+                "text": "Отправь видео на проверку"
+            },
+            "form_5": {
+                "text": "Посмотри ролик как завязывается узел «Грейпвайн». Потом завяжи его самостоятельно. Когда научишься вязать узел, то попроси коллегу снять короткое видео, на котором видно, как ты его завязываешь. Это видео отправь на проверку."
+            },
+            "form_6": {
+                "text": "Узел Грейпвайн",
+                "video_id": "BAACAgIAAxkBAAIIN2hLMvqU8k6GDyBe6Dl2JXaiOIRzAALgfwACC6tYSpjaBA9x7XDHNgQ"
+            },
+            "form_7": {
+                "text": "Отправь видео на проверку"
+            },
+            "form_8": {
+                "text": "Посмотри ролик как завязывается узел «Маршара». Потом завяжи его самостоятельно. Когда научишься вязать узел, то попроси коллегу снять короткое видео, на котором видно, как ты его завязываешь. Это видео отправь на проверку."
+            },
+            "form_9": {
+                "text": "Узел Маршара",
+                "video_id": "BAACAgIAAxkBAAIIOGhLNBQehBNFrzITqax1_hoGBqftAALnfwACC6tYSi0kDAjdCPI3NgQ"
+            },
+            "form_10": {
+                "text": "Отправь видео на проверку"
+            },
+            "form_11": {
+                "text": "Посмотри ролик как завязывается узел «Австрийский проводник». Потом завяжи его самостоятельно. Когда научишься вязать узел, то попроси коллегу снять короткое видео, на котором видно, как ты его завязываешь. Это видео отправь на проверку."
+            },
+            "form_12": {
+                "text": "Узел Австрийский проводник",
+                "video_id": "BAACAgIAAxkBAAIIOWhLNBSqb2stW-7_aDqXpuDMmqLwAAIPfwACyE1ZSvgES79WINUeNgQ"
+            },
+            "form_13": {
+                "text": "Отправь видео на проверку"
+            },
+            "form_14": {
+                "text": "Посмотри ролик как завязывается узел «Булинь». Потом завяжи его самостоятельно. Когда научишься вязать узел, то попроси коллегу снять короткое видео, на котором видно, как ты его завязываешь. Это видео отправь на проверку."
+            },
+            "form_15": {
+                "text": "Узел Булинь",
+                "video_id": "BAACAgIAAxkBAAIIOmhLNQlxwH8AAf_DLS0-iJrnJKTH7AAC_38AAgurWErjMlfXJWdZKDYE"
+            },
+            "form_16": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "5": {
+            "id": 5,
+            "main_button_text": "Лестница: Осмотр перед применением",
+            "form_1": {
+                "text": "Перед тем как использовать лестницу ее необходимо осмотреть на предмет наличия механических повреждений. А также изучить пиктограммы на лестницы: что разрешено и что запрещено. Посмотри ролик как осматривать лестницу и на что обращать внимание. Осмотри свою лестницу, изучи пиктограммы на лестнице. Сними короткое видео основных элементов лестницы и место где расположены пиктограммы. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Осмотр лестницы",
+                "video_id": "BAACAgIAAxkBAAIIBGhLK-INPjVfROMvj-wIKixMyYhyAAJ7fwACC6tYSmiMJnQv1UvxNgQ"
+            },
+            "form_3": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "6": {
+            "id": 6,
+            "main_button_text": "Лестница: Установка на лестницу упора",
+            "form_1": {
+                "text": "Лестницу нельзя устанавливать, упираясь ступенькой к круглой опоре. Так как верхний край лестницы становится неустойчивым. Необходимо установить специальный упор на верхний край лестницы. Посмотри видео как это делается. Сними короткое видео, что у тебя получилось. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Лестнтца: Установка на лестницу упора",
+                "video_id": "BAACAgIAAxkBAAIIYmhRGv2zwzpT9zmUHSL3OtFZU518AAI1eQACJqGJSl6zpGhcP9RrNgQ"
+            },
+            "form_3": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "7": {
+            "id": 7,
+            "main_button_text": "Лестница: Создание анкерной точки на верхней части лестницы",
+            "form_1": {
+                "text": "Нам надо создать анкерную точку на верхней части лестницы. За нее мы будем крепить две веревки: анкерную линию и веревку для крепления лестницы к опоре. Анкерную точку можно создать с помощью анкерной петли или веревки диаметром 10 мм с узлами «Восьмерка» на концах, которую продеваем через верхний край ступеньки лестницы и соединяем карабином. Посмотри видео как это делается. Сними короткое видео, что у тебя получилось. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Лестница: Создание анкерной точки на верхней части лестницы",
+                "video_id": "BAACAgIAAxkBAAIIZGhRHLicW0H5Ub0NTXFsBUqipLFeAAJXeQACJqGJSt6oEGZWrHOENgQ"
+            },
+            "form_3": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "8": {
+            "id": 8,
+            "main_button_text": "Лестница: Продеваем через верх анкерную линию и веревку для косички",
+            "form_1": {
+                "text": "У нас есть теперь анкерная точка на верхней части лестницы. Нам надо через нее продеть анкерную линию и веревку для крепления лестницы методом косички. Посмотри видео как это делается. Сними короткое видео, что у тебя получилось. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Лестница: Продеваем через верх анкерную линию и веревку для косички",
+                "video_id": "BAACAgIAAxkBAAIICmhLLDa0QUzhEQYs3eaemfZnxOWfAAKHfwACC6tYSjvK6iNuf9twNgQ"
+            },
+            "form_3": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "9": {
+            "id": 9,
+            "main_button_text": "Лестница: Установка лестницы к опоре",
+            "form_1": {
+                "text": "На земле мы сделали анкерную точку и продели веревки через нее. Теперь нам надо поднять лестницу на необходимую высоту и установить ее под углом 70-75 градусов. Любой транспортир для измерения угла можно скачать на телефон в Плеймаркете. Посмотри видео как это делается. Сними короткое видео, что у тебя получилось. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Лестница: Установка лестницы к опоре",
+                "video_id": "BAACAgIAAxkBAAIIC2hLLDxfmALubb6gQxy4EhDBAAE0OQACmX4AAshNWUqEphQRd5Zm7TYE"
+            },
+            "form_3": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "10": {
+            "id": 10,
+            "main_button_text": "Лестница: Крепим методом косичка лестницу к опоре",
+            "form_1": {
+                "text": "Нам необходимо лестницу закрепить к опоре, чтобы верхняя и нижняя часть лестницы прочно держались за опору. Крепим лестницу веревкой к опоре методом косичка. Далее пропускаем веревку через ступеньку лестницы и завязываем узлом с карабином оба конца. Регулируем угол наклона лестницы к опоре – 70-75 градусов. Лестница должна быть притянута жестко к опоре. Посмотри видео как это делается. Сними короткое видео, что у тебя получилось. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Лестница: Крепим методом косичка лестницу к опоре",
+                "video_id": "BAACAgIAAxkBAAIIDGhLLF0ZB9H-xSvdD6RhzeqwTOoRAAKJfwACC6tYSmFaVoRKM8iZNgQ"
+            },
+            "form_3": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "11": {
+            "id": 11,
+            "main_button_text": "Лестница: Устанавливаем на лестницу анкерную линию",
+            "form_1": {
+                "text": "Лестница у нас установлена, теперь устанавливаем анкерную линию. На нижней части лестницы нам нужно создать две точки для крепления обеих концов анкерной линии. Это можно сделать специальными анкерными петлями, закрепленными через траверсу лестницы или веревкой с узлами. Так же можно пропустить анкерные петли или веревки через ступеньку, так будет даже надежнее. Один конец анкерной линии пропускаем через спусковое устройство RIG (или узел «Маршара») и крепим за одну точку. Другой конец анкерной линии крепим напрямую за другую анкерную точку. В чрезвычайном случае мы сможем эвакуировать нашего коллегу с высоты с использованием RIG (или узел «Маршара»). Посмотри видео как это делается. Сними короткое видео, что у тебя получилось. Это видео отправь на проверку."
+            },
+            "form_2": {
+                "text": "Лестница: Устанавливаем на лестницу анкерную линию 1",
+                "video_id": "BAACAgIAAxkBAAIIDWhLLJLHv5JdFBuReYMyUs9ims5xAAKLfwACC6tYShGbx2FlBQRaNgQ"
+            },
+            "form_3": {
+                "text": "Лестница: Устанавливаем на лестницу анкерную линию 2",
+                "video_id": "BAACAgIAAxkBAAIIDmhLLJIqLuUMUvBp1Z7IZrszNezAAAKNfwACC6tYSsCYh7w1UycQNgQ"
+            },
+            "form_4": {
+                "text": "Отправь видео на проверку"
+            }
+        },
+        "12": {
+            "id": 12,
+            "main_button_text": "Подъём и эвакуация работника",
+            "form_1": {
+                "text": "Мы собрали страховочную и эвакуационную систему для выполнения работ на опорах воздушной лини связи. Посмотри видео каким образом работник страхуется и осуществляет подъем на опору в страховочной системе, осуществляет проверку работоспособности страховочной системы, а также каким образом происходит эвакуация работника."
+            },
+            "form_2": {
+                "text": "Подъём и эвакуация 1",
+                "video_id": "BAACAgIAAxkBAAIID2hLLM3W-G6dEN33jNq3guVXNLq-AAKPfwACC6tYSia4qWMClQQsNgQ"
+            },
+            "form_3": {
+                "text": "Подъём и эвакуация 2",
+                "video_id": "BAACAgIAAxkBAAIIEGhLLM3nGqzBJOAITOEclkNcbSEHAAKQfwACC6tYSsHUKN_Lz9EJNgQ"
+            }
+        },
+        "13": {
+            "id": 13,
+            "main_button_text": "Заключение",
+            "form_1": {
+                "text": "Мы подошли к концу нашего тренинга. Мы изучили поэтапно все компоненты страховочной и эвакуационной системы при выполнении работы на опоре воздушной лини связи. Теперь необходимо сдать экзамен. Перейди в раздел «Сдать экзамен» и выполни задания. Удачи. У тебя все получится."
+            }
+        }
+    },
+    "documents": {
+        "1": {
+            "name": "Страховочная привязь",
+            "docs": [
+                {
+                    "name": "Привязь страховочная PS-2 (ARX)",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F9LzjHtMLW7%2BJUxxF%2BSU8F%2BN6Ety0UGUtwZ4QitVP%2BXoZMJnvzK%2Bw%2Fn4T5VkHQVVwq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F1_%D0%A1%D1%82%D1%80%D0%B0%D1%85_%D0%BF%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D1%8C_PS-2_ARX.pdf&name=1_%D0%A1%D1%82%D1%80%D0%B0%D1%85_%D0%BF%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D1%8C_PS-2_ARX.pdf"
+                },
+                {
+                    "name": " Страх_привязь ST2, ST3, ST5, ST6, ST3N, ST5N, CANYON Sef-Tec",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F9LzjHtMLW7%2BJUxxF%2BSU8F%2BN6Ety0UGUtwZ4QitVP%2BXoZMJnvzK%2Bw%2Fn4T5VkHQVVwq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F2_%D0%A1%D1%82%D1%80%D0%B0%D1%85_%D0%BF%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D1%8C_ST2%2C%20ST3%2C%20ST5%2C%20ST6%2C%20ST3N%2C%20ST5N%2C%20CANYON_Sef-Tec.pdf&name=2_%D0%A1%D1%82%D1%80%D0%B0%D1%85_%D0%BF%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D1%8C_ST2%2C%20ST3%2C%20ST5%2C%20ST6%2C%20ST3N%2C%20ST5N%2C%20CANYON_Sef-Tec.pdf"
+                },
+                {
+                    "name": "Страховочная привязь 041,042,043 Высота Vento",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F9LzjHtMLW7%2BJUxxF%2BSU8F%2BN6Ety0UGUtwZ4QitVP%2BXoZMJnvzK%2Bw%2Fn4T5VkHQVVwq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F3_%D0%A1%D1%82%D1%80%D0%B0%D1%85_%D0%BF%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D1%8C_041%2C042%2C043%20%D0%92%D1%8B%D1%81%D0%BE%D1%82%D0%B0_Vento.pdf&name=3_%D0%A1%D1%82%D1%80%D0%B0%D1%85_%D0%BF%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D1%8C_041%2C042%2C043%20%D0%92%D1%8B%D1%81%D0%BE%D1%82%D0%B0_Vento.pdf"
+                },
+                {
+                    "name": "Страховачная привязь Зубр",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F9LzjHtMLW7%2BJUxxF%2BSU8F%2BN6Ety0UGUtwZ4QitVP%2BXoZMJnvzK%2Bw%2Fn4T5VkHQVVwq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F4_%D0%A1%D1%82%D1%80%D0%B0%D1%85_%D0%BF%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D1%8C_%D0%97%D1%83%D0%B1%D1%80.pdf&name=4_%D0%A1%D1%82%D1%80%D0%B0%D1%85_%D0%BF%D1%80%D0%B8%D0%B2%D1%8F%D0%B7%D1%8C_%D0%97%D1%83%D0%B1%D1%80.pdf"
+                },
+                {
+                    "name": "УСП 2а",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F9LzjHtMLW7%2BJUxxF%2BSU8F%2BN6Ety0UGUtwZ4QitVP%2BXoZMJnvzK%2Bw%2Fn4T5VkHQVVwq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F5_%D0%A3%D0%A1%D0%9F_2%D0%B0.pdf&name=5_%D0%A3%D0%A1%D0%9F_2%D0%B0.pdf"
+                }
+            ]
+        },
+        "2": {
+            "name": "Гибкая анкерная линия",
+            "docs": []
+        },
+        "3": {
+            "name": "Захват ползункового типа для гибкой анкерной линии",
+            "docs": [
+                {
+                    "name": "Устройство позиционирования на канатах типа А Зажим «Лайнблок» Vento",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FimHc4Zr3SfLSLXKv2%2FOFe02EsMSRAXuFQz%2FYUEeAzvlXtVz0m6x1FtQK13DPpKBnq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F3.1_%D0%97%D0%B0%D0%B6%D0%B8%D0%BC%20%D0%9B%D0%B0%D0%B9%D0%BC%D0%B1%D0%BB%D0%BE%D0%BA_Vento.pdf&name=3.1_%D0%97%D0%B0%D0%B6%D0%B8%D0%BC%20%D0%9B%D0%B0%D0%B9%D0%BC%D0%B1%D0%BB%D0%BE%D0%BA_Vento.pdf"
+                }
+            ]
+        },
+        "4": {
+            "name": "Строп удерживающий регулируемый (нерегулируемый)",
+            "docs": []
+        },
+        "5": {
+            "name": "Спусковое устройство",
+            "docs": [
+                {
+                    "name": "Инструкция RIG",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F24wcs%2FbJRDuVjqBuRFEtj3vFJtqh8Z9hnhwLkyijsNuN8%2BykiKRLSqIugCzF81UAq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F_RIG.pdf&name=%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F_RIG.pdf"
+                },
+                {
+                    "name": "Процедура осмотра RIG",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F24wcs%2FbJRDuVjqBuRFEtj3vFJtqh8Z9hnhwLkyijsNuN8%2BykiKRLSqIugCzF81UAq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D0%B4%D1%83%D1%80%D0%B0%20%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80%D0%B0_RIG.pdf&name=%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D0%B4%D1%83%D1%80%D0%B0%20%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80%D0%B0_RIG.pdf"
+                },
+                {
+                    "name": "Советы по уходу RIG",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F24wcs%2FbJRDuVjqBuRFEtj3vFJtqh8Z9hnhwLkyijsNuN8%2BykiKRLSqIugCzF81UAq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%8B%20%D0%BF%D0%BE%20%D1%83%D1%85%D0%BE%D0%B4%D1%83_RIG.pdf&name=%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%8B%20%D0%BF%D0%BE%20%D1%83%D1%85%D0%BE%D0%B4%D1%83_RIG.pdf"
+                },
+                {
+                    "name": "Бланк проверки RIG",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F24wcs%2FbJRDuVjqBuRFEtj3vFJtqh8Z9hnhwLkyijsNuN8%2BykiKRLSqIugCzF81UAq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%91%D0%BB%D0%B0%D0%BD%D0%BA%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8_RIG.pdf&name=%D0%91%D0%BB%D0%B0%D0%BD%D0%BA%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8_RIG.pdf"
+                },
+                {
+                    "name": "ДОКУМЕНТ НА ОБОРУДОВАНИЕ RIG",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F24wcs%2FbJRDuVjqBuRFEtj3vFJtqh8Z9hnhwLkyijsNuN8%2BykiKRLSqIugCzF81UAq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%94%D0%9E%D0%9A%D0%A3%D0%9C%D0%95%D0%9D%D0%A2%20%D0%9D%D0%90%20%D0%9E%D0%91%D0%9E%D0%A0%D0%A3%D0%94%D0%9E%D0%92%D0%90%D0%9D%D0%98%D0%95%20RIG%20%E2%84%96%2023I0517383083.docx&name=%D0%94%D0%9E%D0%9A%D0%A3%D0%9C%D0%95%D0%9D%D0%A2%20%D0%9D%D0%90%20%D0%9E%D0%91%D0%9E%D0%A0%D0%A3%D0%94%D0%9E%D0%92%D0%90%D0%9D%D0%98%D0%95%20RIG%20%E2%84%96%2023I0517383083.docx"
+                }
+            ]
+        },
+        "6": {
+            "name": "Петля анкерная",
+            "docs": [
+                {
+                    "name": "Петля крепежная",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FPi1gqmkAyP60vpmEIl8lqfKINR4Ar5HlR5ge1XdLQUUYROA%2FCjfDK%2BbjI48Uylkjq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%9F%D0%B5%D1%82%D0%BB%D1%8F%20%D0%BA%D1%80%D0%B5%D0%BF%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F.pdf&name=%D0%9F%D0%B5%D1%82%D0%BB%D1%8F%20%D0%BA%D1%80%D0%B5%D0%BF%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F.pdf"
+                }
+            ]
+        },
+        "7": {
+            "name": "Веревка вспомогательная",
+            "docs": [
+                {
+                    "name": "Веревка вспомогательная 7 VENTO",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2Fv7sWsvpDIUp%2Bj3eMG5JkGV7YcgUWHBgqSYg4uA%2BerfMNd6kAkkpGOJKYLdg289xWq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%92%D0%B5%D1%80%D0%B5%D0%B2%D0%BA%D0%B0%20%D0%B2%D1%81%D0%BF%D0%BE%D0%BC%D0%BE%D0%B3%D0%B0%D1%82_7_VENTO.pdf&name=%D0%92%D0%B5%D1%80%D0%B5%D0%B2%D0%BA%D0%B0%20%D0%B2%D1%81%D0%BF%D0%BE%D0%BC%D0%BE%D0%B3%D0%B0%D1%82_7_VENTO.pdf"
+                }
+            ]
+        },
+        "8": {
+            "name": "Карабин",
+            "docs": []
+        },
+        "9": {
+            "name": "Блок – ролик",
+            "docs": [
+                {
+                    "name": "Блок ролик Vertical",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FEcb0tc1ZeW3yhQRtBcMFLg2p03OnUaaFHRSOTiZ1dUWz5DPKo8uvetd3oE9TnXtjq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%91%D0%BB%D0%BE%D0%BA%20%D1%80%D0%BE%D0%BB%D0%B8%D0%BA_Vertical.pdf&name=%D0%91%D0%BB%D0%BE%D0%BA%20%D1%80%D0%BE%D0%BB%D0%B8%D0%BA_Vertical.pdf"
+                }
+            ]
+        },
+        "10": {
+            "name": "Каска для работы на высоте",
+            "docs": [
+                {
+                    "name": "Каска Мастер Vento",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F63B0qfECsVq9vHq18OKSmgvbxiZlNLKXXk6b0crPD%2B2qc7LBlg6tTY1oxULk697Kq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F1_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_%D0%9C%D0%B0%D1%81%D1%82%D0%B5%D1%80_Vento.pdf&name=1_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_%D0%9C%D0%B0%D1%81%D1%82%D0%B5%D1%80_Vento.pdf"
+                },
+                {
+                    "name": "Каска BASEBALL DIAMOND V UP DIAM5UPJAFL",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F63B0qfECsVq9vHq18OKSmgvbxiZlNLKXXk6b0crPD%2B2qc7LBlg6tTY1oxULk697Kq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F2_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_BASEBALL%20DIAMOND%20V%20UP%20DIAM5UPJAFL.pdf&name=2_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_BASEBALL%20DIAMOND%20V%20UP%20DIAM5UPJAFL.pdf"
+                },
+                {
+                    "name": "Каска Vertex Petzl осмотр",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F63B0qfECsVq9vHq18OKSmgvbxiZlNLKXXk6b0crPD%2B2qc7LBlg6tTY1oxULk697Kq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F3_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_Vertex_Petzl%20_%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80.pdf&name=3_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_Vertex_Petzl%20_%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80.pdf"
+                },
+                {
+                    "name": "Каска Vertex Petzl",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F63B0qfECsVq9vHq18OKSmgvbxiZlNLKXXk6b0crPD%2B2qc7LBlg6tTY1oxULk697Kq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F3_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_Vertex_Petzl.pdf&name=3_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_Vertex_Petzl.pdf"
+                },
+                {
+                    "name": "Каска Vertex Petzl бланк проверки",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F63B0qfECsVq9vHq18OKSmgvbxiZlNLKXXk6b0crPD%2B2qc7LBlg6tTY1oxULk697Kq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F3_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_Vertex_Petzl_%D0%B1%D0%BB%D0%B0%D0%BD%D0%BA%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8.pdf&name=3_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_Vertex_Petzl_%D0%B1%D0%BB%D0%B0%D0%BD%D0%BA%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8.pdf"
+                },
+                {
+                    "name": "Каска Vertex Petzl советы по уходу",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F63B0qfECsVq9vHq18OKSmgvbxiZlNLKXXk6b0crPD%2B2qc7LBlg6tTY1oxULk697Kq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F3_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_Vertex_Petzl_%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B%20%D0%BF%D0%BE%20%D1%83%D1%85%D0%BE%D0%B4%D1%83.pdf&name=3_%D0%9A%D0%B0%D1%81%D0%BA%D0%B0_Vertex_Petzl_%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B%20%D0%BF%D0%BE%20%D1%83%D1%85%D0%BE%D0%B4%D1%83.pdf"
+                }
+            ]
+        },
+        "11": {
+            "name": "Лестницы",
+            "docs": [
+                {
+                    "name": "Лестница Алюмет H1-HS1-HK1",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FE2zQdCaa9WTnFU5zE6K7D2oz6HlEydBpdFeccNb7bSyAnbsjiIgmQ%2BzJpOj8%2B9F3q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%9B%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D0%B0_%D0%90%D0%BB%D1%8E%D0%BC%D0%B5%D1%82_H1-HS1-HK1.pdf&name=%D0%9B%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D0%B0_%D0%90%D0%BB%D1%8E%D0%BC%D0%B5%D1%82_H1-HS1-HK1.pdf"
+                },
+                {
+                    "name": "Лестницы KRAUSE",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FE2zQdCaa9WTnFU5zE6K7D2oz6HlEydBpdFeccNb7bSyAnbsjiIgmQ%2BzJpOj8%2B9F3q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%9B%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D1%8B_KRAUSE.pdf&name=%D0%9B%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D1%8B_KRAUSE.pdf"
+                },
+                {
+                    "name": "Лестницы Алюмет H3-HS3",
+                    "url": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FE2zQdCaa9WTnFU5zE6K7D2oz6HlEydBpdFeccNb7bSyAnbsjiIgmQ%2BzJpOj8%2B9F3q%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F%D0%9B%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D1%8B_%D0%90%D0%BB%D1%8E%D0%BC%D0%B5%D1%82_H3-HS3.pdf&name=%D0%9B%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D1%8B_%D0%90%D0%BB%D1%8E%D0%BC%D0%B5%D1%82_H3-HS3.pdf"
+                }
+            ]
+        }
+    },
+    "exam": {
+        "next_button_text": "Далее",
+        "form_1": {
+            "text": "Теперь мы можем сдать экзамен. У нас будут два задания, которые необходимо выполнить и снять на телефон."
+        },
+        "form_2": {
+            "text": "1. Одеть и отрегулировать страховочную привязь. Присоединить строп для позиционирования.\n\nОтправь видео на проверку."
+        },
+        "form_3": {
+            "text": "2. Установить лестницу к опоре и собрать эвакуационную и страховочную систему. Подниматься не надо. Мы это сделаем очно.\n\nОтправь видео на проверку."
+        },
+        "form_4": {
+            "text": "Ура! Ты выполнил все задания. Мы скоро проверим и дадим обратную связь."
+        }
+    }
+}

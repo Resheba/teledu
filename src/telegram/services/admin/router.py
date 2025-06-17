@@ -1,83 +1,120 @@
-# mypy: disable-error-code="union-attr, arg-type"
 from typing import TYPE_CHECKING
 
 from aiogram import Router
-from aiogram.filters import Command
-from aiogram.types import CallbackQuery, Message
+from aiogram.filters import Command, StateFilter
+from aiogram.types import CallbackQuery, InputMediaVideo, Message
 
 from src.database import DatabaseService
 
+from .filters import IsAdmin
 from .keyboards import (
-    AnswerApproveCallback,
-    AnswerDetailCallback,
-    AnswerPageCallback,
-    create_answer_detail_menu,
-    create_answers_menu,
+    AdminKeyboard,
+    AnswerCallbackData,
+    ApproveAnswerCallbackData,
+    ApproveCallbackData,
+    ApproveUserCallbackData,
 )
-from .utils import create_answers_detail_text
 
 if TYPE_CHECKING:
-    from src.database.models import Answer
+    from src.database.models import User
+
 
 router: Router = Router(name="admin")
+router.message.filter(IsAdmin())
+router.callback_query.filter(IsAdmin())
 
 
-# @router.message(F.video)
-# async def echo(message: Message) -> None:
-#     await message.answer(repr(message.video) or "None?")
-
-
-@router.message(Command("answers"))
-async def get_all_answers(message: Message, manager: DatabaseService) -> None:
-    answers: list[Answer] = await manager.get_unapproved_answers()
-    await message.answer("Ответы", reply_markup=create_answers_menu(answers))
-
-
-@router.callback_query(AnswerPageCallback.filter())
-async def answers_page(
-    query: CallbackQuery,
-    callback_data: AnswerPageCallback,
+@router.message(Command("approves"), StateFilter(None))
+async def approve_handler(
+    message: Message,
     manager: DatabaseService,
 ) -> None:
-    answers: list[Answer] = await manager.get_unapproved_answers()
-    await query.message.edit_reply_markup(
-        reply_markup=create_answers_menu(answers, current_page=callback_data.page),
-    )
+    ready_users: list[tuple[User, int]] = await manager.get_users_with_answer_count()
+    await message.answer("Ответы", reply_markup=AdminKeyboard.approves_keyboard(users=ready_users))
 
 
-@router.callback_query(AnswerDetailCallback.filter())
-async def answer_details(
+@router.callback_query(ApproveCallbackData.filter())
+async def approve_cb_handler(
     query: CallbackQuery,
-    callback_data: AnswerDetailCallback,
     manager: DatabaseService,
+    callback_data: ApproveCallbackData,
 ) -> None:
-    answer: Answer | None = await manager.get_answer(callback_data.answer_id)
-    if answer is None:
-        await query.answer("Ошибка при получении ответа!")
+    if isinstance(query.message, Message):
+        ready_users: list[tuple[User, int]] = await manager.get_users_with_answer_count()
+        await query.message.edit_text(
+            "Ответы",
+            reply_markup=AdminKeyboard.approves_keyboard(
+                users=ready_users,
+                current_page=callback_data.page,
+            ),
+        )
+
+
+@router.callback_query(ApproveUserCallbackData.filter())
+async def user_answers_callback_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ApproveUserCallbackData,
+) -> None:
+    if isinstance(query.message, Message):
+        user = await manager.get_user(callback_data.user_id)
+        if user is None:
+            return
+        answers = await manager.get_user_unapproved_answers(callback_data.user_id)
+        await query.message.edit_text(
+            f"Ответы пользователя <b>{user.name}</b>",
+            parse_mode="HTML",
+            reply_markup=AdminKeyboard.user_unapproved_keyboard(
+                answers=answers,
+            ),
+        )
+
+
+@router.callback_query(AnswerCallbackData.filter())
+async def answer_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: AnswerCallbackData,
+) -> None:
+    if not isinstance(query.message, Message):
         return
-    await query.message.answer_video(
-        video=answer.video_answer_id,
-        caption=create_answers_detail_text(answer),
-        reply_markup=create_answer_detail_menu(answer),
-    )
 
-
-@router.callback_query(AnswerApproveCallback.filter())
-async def answer_approve(
-    query: CallbackQuery,
-    callback_data: AnswerApproveCallback,
-    manager: DatabaseService,
-) -> None:
-    answer: Answer | None = await manager.get_answer(callback_data.answer_id)
-    if answer is None:
-        await query.answer("Ошибка при получении ответа!")
+    answers = await manager.get_answer(callback_data.answer_id)
+    if answers is None:
+        await query.answer("Ответ не найден", show_alert=True)
         return
-    if callback_data.is_approved:
-        await manager.approve_answer(callback_data.answer_id)
-        await query.bot.send_message(answer.user_id, "Ваш ответ одобрен!")
-        await query.answer("Ответ одобрен!")
-    else:
-        await manager.reject_answer(callback_data.answer_id)
-        await query.bot.send_message(answer.user_id, "Ваш ответ отклонен!")
-        await query.answer("Ответ отклонен!")
+    if not answers.videos:
+        await query.answer("Ответ пустой", show_alert=True)
+        return
+    await query.message.reply_media_group(
+        media=[InputMediaVideo(media=video.video_id) for video in answers.videos],
+    )
+    await query.message.answer(
+        text=answers.chapter.name,
+        reply_markup=AdminKeyboard.answer_keyboard(answers.id, answers.user_id),
+    )
     await query.message.delete_reply_markup()
+
+
+@router.callback_query(ApproveAnswerCallbackData.filter())
+async def approve_answer_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ApproveAnswerCallbackData,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+
+    if callback_data.is_approved is True:
+        await manager.approve_answer(callback_data.answer_id)
+        await query.answer("✅ Ответ одобрен!")
+    else:
+        await manager.unapprove_answer(callback_data.answer_id)
+        await query.answer("❌ Ответ отклонен!")
+
+    await query.message.delete_reply_markup()
+    await user_answers_callback_handler(
+        query,
+        manager,
+        ApproveUserCallbackData(user_id=callback_data.user_id),
+    )

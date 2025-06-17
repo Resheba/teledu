@@ -1,3 +1,35 @@
 from .router import router
+from .tasks import (
+    exam_router,
+    task1_router,
+    task2_router,
+    task3_router,
+    task4_router,
+    task5_router,
+    task6_router,
+    task7_router,
+    task8_router,
+    task9_router,
+    task10_router,
+    task11_router,
+    task12_router,
+    task13_router,
+)
 
-__all__ = ("router",)
+__all__ = (
+    "router",
+    "task1_router",
+    "task2_router",
+    "task3_router",
+    "task4_router",
+    "task5_router",
+    "task6_router",
+    "task7_router",
+    "task8_router",
+    "task9_router",
+    "task10_router",
+    "task11_router",
+    "task12_router",
+    "task13_router",
+    "exam_router",
+)
