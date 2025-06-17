@@ -105,11 +105,13 @@ class Edu11(EduBase):
     form_1: Form
     form_2: Form
     form_3: Form
+    form_4: Form
 
 
 class Edu12(EduBase):
     form_1: Form
     form_2: Form
+    form_3: Form
 
 
 class Edu13(EduBase):

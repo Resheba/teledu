@@ -50,6 +50,25 @@ async def form2(
     TasksStateGroup.edu12,
     Task12CallbackData.filter(F.form == 3),  # noqa: PLR2004
 )
+async def form3(
+    query: CallbackQuery,
+    callback_data: Task12CallbackData,
+    texts: Texts,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+    await send(
+        message=query.message,
+        form=texts.education.edu12.form_3,
+        reply_button_text=texts.education.next_button_text,
+        callback_data=Task12CallbackData(form=callback_data.form + 1).pack(),
+    )
+
+
+@router.callback_query(
+    TasksStateGroup.edu12,
+    Task12CallbackData.filter(F.form == 4),  # noqa: PLR2004
+)
 async def end(
     query: CallbackQuery,
     state: FSMContext,

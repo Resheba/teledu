@@ -154,7 +154,7 @@
             },
             "form_2": {
                 "text": "Осмотр лестницы",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIBGhLK-INPjVfROMvj-wIKixMyYhyAAJ7fwACC6tYSmiMJnQv1UvxNgQ"
             },
             "form_3": {
                 "text": "Отправь видео на проверку"
@@ -168,7 +168,7 @@
             },
             "form_2": {
                 "text": "Лестнтца: Установка на лестницу упора",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIYmhRGv2zwzpT9zmUHSL3OtFZU518AAI1eQACJqGJSl6zpGhcP9RrNgQ"
             },
             "form_3": {
                 "text": "Отправь видео на проверку"
@@ -182,7 +182,7 @@
             },
             "form_2": {
                 "text": "Лестница: Создание анкерной точки на верхней части лестницы",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIZGhRHLicW0H5Ub0NTXFsBUqipLFeAAJXeQACJqGJSt6oEGZWrHOENgQ"
             },
             "form_3": {
                 "text": "Отправь видео на проверку"
@@ -196,7 +196,7 @@
             },
             "form_2": {
                 "text": "Лестница: Продеваем через верх анкерную линию и веревку для косички",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIICmhLLDa0QUzhEQYs3eaemfZnxOWfAAKHfwACC6tYSjvK6iNuf9twNgQ"
             },
             "form_3": {
                 "text": "Отправь видео на проверку"
@@ -210,7 +210,7 @@
             },
             "form_2": {
                 "text": "Лестница: Установка лестницы к опоре",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIC2hLLDxfmALubb6gQxy4EhDBAAE0OQACmX4AAshNWUqEphQRd5Zm7TYE"
             },
             "form_3": {
                 "text": "Отправь видео на проверку"
@@ -224,7 +224,7 @@
             },
             "form_2": {
                 "text": "Лестница: Крепим методом косичка лестницу к опоре",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "video_id": "BAACAgIAAxkBAAIIDGhLLF0ZB9H-xSvdD6RhzeqwTOoRAAKJfwACC6tYSmFaVoRKM8iZNgQ"
             },
             "form_3": {
                 "text": "Отправь видео на проверку"
@@ -237,10 +237,14 @@
                 "text": "Лестница у нас установлена, теперь устанавливаем анкерную линию. На нижней части лестницы нам нужно создать две точки для крепления обеих концов анкерной линии. Это можно сделать специальными анкерными петлями, закрепленными через траверсу лестницы или веревкой с узлами. Так же можно пропустить анкерные петли или веревки через ступеньку, так будет даже надежнее. Один конец анкерной линии пропускаем через спусковое устройство RIG (или узел «Маршара») и крепим за одну точку. Другой конец анкерной линии крепим напрямую за другую анкерную точку. В чрезвычайном случае мы сможем эвакуировать нашего коллегу с высоты с использованием RIG (или узел «Маршара»). Посмотри видео как это делается. Сними короткое видео, что у тебя получилось. Это видео отправь на проверку."
             },
             "form_2": {
-                "text": "Лестница: Устанавливаем на лестницу анкерную линию",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "text": "Лестница: Устанавливаем на лестницу анкерную линию 1",
+                "video_id": "BAACAgIAAxkBAAIIDWhLLJLHv5JdFBuReYMyUs9ims5xAAKLfwACC6tYShGbx2FlBQRaNgQ"
             },
             "form_3": {
+                "text": "Лестница: Устанавливаем на лестницу анкерную линию 2",
+                "video_id": "BAACAgIAAxkBAAIIDmhLLJIqLuUMUvBp1Z7IZrszNezAAAKNfwACC6tYSsCYh7w1UycQNgQ"
+            },
+            "form_4": {
                 "text": "Отправь видео на проверку"
             }
         },
@@ -251,8 +255,12 @@
                 "text": "Мы собрали страховочную и эвакуационную систему для выполнения работ на опорах воздушной лини связи. Посмотри видео каким образом работник страхуется и осуществляет подъем на опору в страховочной системе, осуществляет проверку работоспособности страховочной системы, а также каким образом происходит эвакуация работника."
             },
             "form_2": {
-                "text": "Подъём и эвакуация",
-                "video_id": "BAACAgIAAxkBAAIBmGe3W73qdOZkR1Xvpd18UVv4gMLCAAIqZQACXta5SVssI5YinfF6NgQ"
+                "text": "Подъём и эвакуация 1",
+                "video_id": "BAACAgIAAxkBAAIID2hLLM3W-G6dEN33jNq3guVXNLq-AAKPfwACC6tYSia4qWMClQQsNgQ"
+            },
+            "form_3": {
+                "text": "Подъём и эвакуация 2",
+                "video_id": "BAACAgIAAxkBAAIIEGhLLM3nGqzBJOAITOEclkNcbSEHAAKQfwACC6tYSsHUKN_Lz9EJNgQ"
             }
         },
         "13": {
