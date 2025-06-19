@@ -66,6 +66,7 @@ class Telegram:
                 BotCommand(command="/start", description="Start"),
                 BotCommand(command="/menu", description="Menu"),
                 BotCommand(command="/approves", description="Approves"),
+                BotCommand(command="/exams", description="Exams"),
             ],
         )
         await self._dispatcher.start_polling(

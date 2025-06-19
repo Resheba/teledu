@@ -13,6 +13,8 @@ from .models import (
     Exam,
     UnapprovedAnswerDTO,
     UnapprovedAnswersDTO,
+    UnapprovedExamDTO,
+    UnapprovedExamsDTO,
     User,
     UserAnswersDTO,
 )
@@ -186,6 +188,25 @@ class DatabaseService:
                     ),
                 ),
             )
+
+    async def get_exam(self, exam_id: int) -> Exam | None:
+        async with self._manager.get_session() as session:
+            return cast(Exam | None, await session.get(Exam, exam_id))
+
+    async def get_users_unapproved_exams(self) -> list[UnapprovedExamDTO]:
+        stmt = (
+            self._manager[Exam.id, User.name]
+            .select.select_from(Exam)
+            .join(User, User.telegram_id == Exam.user_id)
+            .where(Exam.is_approved.is_(None))
+        )
+        async with self._manager.get_session() as session:
+            result = await session.execute(stmt)
+            return UnapprovedExamsDTO.validate_python(map(tuple, result.all()))
+
+    async def mark_exam(self, exam_id: int, *, mark: bool) -> None:
+        stmt = self._manager[Exam].update.where(Exam.id == exam_id).values(is_approved=mark)
+        await self._manager.execute(stmt, commit=True)
 
     # async def reject_answer(self, answer_id: int) -> None:
     #     stmt = self._manager[Answer].delete.where(Answer.id == answer_id)

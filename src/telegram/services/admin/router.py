@@ -13,6 +13,9 @@ from .keyboards import (
     ApproveAnswerCallbackData,
     ApproveCallbackData,
     ApproveUserCallbackData,
+    ExamApproveCallbackData,
+    ExamCallbackData,
+    ExamPageCallbackData,
 )
 
 if TYPE_CHECKING:
@@ -118,3 +121,68 @@ async def approve_answer_cb_handler(
         manager,
         ApproveUserCallbackData(user_id=callback_data.user_id),
     )
+
+
+@router.callback_query(ExamPageCallbackData.filter())
+async def exam_page_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ExamPageCallbackData,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+    exams = await manager.get_users_unapproved_exams()
+    await query.message.edit_text(
+        "Экзамены",
+        reply_markup=AdminKeyboard.exams_keyboard(exams, current_page=callback_data.page),
+    )
+
+
+@router.message(Command("exams"), StateFilter(None))
+async def exams_handler(
+    message: Message,
+    manager: DatabaseService,
+) -> None:
+    exams = await manager.get_users_unapproved_exams()
+    await message.answer("Экзамены", reply_markup=AdminKeyboard.exams_keyboard(exams))
+
+
+@router.callback_query(ExamApproveCallbackData.filter())
+async def exam_approve_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ExamApproveCallbackData,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+    await manager.mark_exam(callback_data.exam_id, mark=callback_data.is_approved)
+
+    await query.message.delete_reply_markup()
+    await exams_handler(message=query.message, manager=manager)
+
+
+@router.callback_query(ExamCallbackData.filter())
+async def exam_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ExamCallbackData,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+
+    exam = await manager.get_exam(callback_data.exam_id)
+    if exam is None:
+        await query.answer("Ответ не найден", show_alert=True)
+        return
+    if not exam.video1_id or not exam.video2_id:
+        await query.answer("Ответ пустой", show_alert=True)
+        return
+    await query.message.reply_media_group(
+        media=[InputMediaVideo(media=exam.video1_id), InputMediaVideo(media=exam.video2_id)],
+    )
+    await query.message.answer(
+        text=f"Экзамен <b>{callback_data.user_name}</b>",
+        reply_markup=AdminKeyboard.exam_keyboard(exam.id),
+        parse_mode="HTML",
+    )
+    await query.message.delete_reply_markup()
