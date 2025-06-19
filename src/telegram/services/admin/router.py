@@ -17,6 +17,7 @@ from .keyboards import (
     ExamCallbackData,
     ExamPageCallbackData,
 )
+from .utils import send_notification
 
 if TYPE_CHECKING:
     from src.database.models import User
@@ -115,6 +116,11 @@ async def approve_answer_cb_handler(
         await manager.unapprove_answer(callback_data.answer_id)
         await query.answer("❌ Ответ отклонен!")
 
+    text = "✅ Экзамен одобрен!" if callback_data.is_approved else "❌ Экзамен отклонен!"
+
+    if bot := query.bot:
+        await send_notification(bot=bot, chat_id=callback_data.user_id, message=text)
+
     await query.message.delete_reply_markup()
     await user_answers_callback_handler(
         query,
@@ -156,6 +162,10 @@ async def exam_approve_cb_handler(
     if not isinstance(query.message, Message):
         return
     await manager.mark_exam(callback_data.exam_id, mark=callback_data.is_approved)
+    # Add notification
+    text = "✅ Экзамен одобрен!" if callback_data.is_approved else "❌ Экзамен отклонен!"
+    if bot := query.bot:
+        await send_notification(bot=bot, chat_id=callback_data.user_id, message=text)
 
     await query.message.delete_reply_markup()
     await exams_handler(message=query.message, manager=manager)
@@ -182,7 +192,7 @@ async def exam_cb_handler(
     )
     await query.message.answer(
         text=f"Экзамен <b>{callback_data.user_name}</b>",
-        reply_markup=AdminKeyboard.exam_keyboard(exam.id),
+        reply_markup=AdminKeyboard.exam_keyboard(exam.id, user_id=callback_data.user_id),
         parse_mode="HTML",
     )
     await query.message.delete_reply_markup()

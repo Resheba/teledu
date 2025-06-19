@@ -27,10 +27,12 @@ class ApproveAnswerCallbackData(CallbackData, prefix="ansappr"):
 class ExamCallbackData(CallbackData, prefix="examcheck"):
     exam_id: int
     user_name: str
+    user_id: int
 
 
 class ExamApproveCallbackData(CallbackData, prefix="examappr"):
     exam_id: int
+    user_id: int
     is_approved: bool
 
 
@@ -130,6 +132,7 @@ class AdminKeyboard:
                     callback_data=ExamCallbackData(
                         exam_id=exam.exam_id,
                         user_name=exam.user_name,
+                        user_id=exam.user_id,
                     ).pack(),
                 ),
             ]
@@ -155,7 +158,7 @@ class AdminKeyboard:
         )
 
     @staticmethod
-    def exam_keyboard(exam_id: int) -> InlineKeyboardMarkup:
+    def exam_keyboard(exam_id: int, user_id: int) -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup(
             inline_keyboard=[
                 [
@@ -164,6 +167,7 @@ class AdminKeyboard:
                         callback_data=ExamApproveCallbackData(
                             exam_id=exam_id,
                             is_approved=True,
+                            user_id=user_id,
                         ).pack(),
                     ),
                 ],
@@ -173,6 +177,7 @@ class AdminKeyboard:
                         callback_data=ExamApproveCallbackData(
                             exam_id=exam_id,
                             is_approved=False,
+                            user_id=user_id,
                         ).pack(),
                     ),
                 ],

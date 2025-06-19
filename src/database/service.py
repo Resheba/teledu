@@ -195,7 +195,7 @@ class DatabaseService:
 
     async def get_users_unapproved_exams(self) -> list[UnapprovedExamDTO]:
         stmt = (
-            self._manager[Exam.id, User.name]
+            self._manager[Exam.id, User.name, User.telegram_id]
             .select.select_from(Exam)
             .join(User, User.telegram_id == Exam.user_id)
             .where(Exam.is_approved.is_(None))
