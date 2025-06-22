@@ -2,7 +2,14 @@ from typing import TYPE_CHECKING
 
 from aiogram import Router
 from aiogram.filters import Command, StateFilter
-from aiogram.types import CallbackQuery, InputMediaVideo, Message
+from aiogram.fsm.context import FSMContext
+from aiogram.types import (
+    CallbackQuery,
+    InputMediaVideo,
+    KeyboardButton,
+    Message,
+    ReplyKeyboardMarkup,
+)
 
 from src.database import DatabaseService
 
@@ -13,10 +20,15 @@ from .keyboards import (
     ApproveAnswerCallbackData,
     ApproveCallbackData,
     ApproveUserCallbackData,
+    ExamApproveCallbackData,
+    ExamCallbackData,
+    ExamPageCallbackData,
 )
+from .states import FeedbackStateGroup
+from .utils import Feedback, send_notification
 
 if TYPE_CHECKING:
-    from src.database.models import User
+    from src.database.models import Answer, User
 
 
 router: Router = Router(name="admin")
@@ -99,22 +111,185 @@ async def answer_cb_handler(
 @router.callback_query(ApproveAnswerCallbackData.filter())
 async def approve_answer_cb_handler(
     query: CallbackQuery,
-    manager: DatabaseService,
     callback_data: ApproveAnswerCallbackData,
+    manager: DatabaseService,
+    state: FSMContext,
+) -> None:
+    if not isinstance(query.message, Message) or (bot := query.bot) is None:
+        return
+
+    if callback_data.is_approved is False:
+        await query.message.answer(
+            "Оставьте комментарий",
+            reply_markup=ReplyKeyboardMarkup(
+                keyboard=[
+                    [KeyboardButton(text="Отмена")],
+                ],
+                one_time_keyboard=True,
+                resize_keyboard=True,
+            ),
+        )
+        await state.set_state(FeedbackStateGroup.feedback)
+        await state.update_data(feedback=Feedback(type="ANSWER", callback_data=callback_data))
+    else:
+        await query.answer("✅Ответ одобрен!")
+        await manager.approve_answer(
+            callback_data.answer_id,
+        )
+        await send_notification(
+            bot=bot,
+            chat_id=callback_data.user_id,
+            message="✅Один из ответов был одобрен!",
+        )
+
+    await query.message.delete_reply_markup()
+
+
+@router.callback_query(ExamPageCallbackData.filter())
+async def exam_page_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ExamPageCallbackData,
+) -> None:
+    if not isinstance(query.message, Message):
+        return
+    exams = await manager.get_users_unapproved_exams()
+    await query.message.edit_text(
+        "Экзамены",
+        reply_markup=AdminKeyboard.exams_keyboard(exams, current_page=callback_data.page),
+    )
+
+
+@router.message(Command("exams"), StateFilter(None))
+async def exams_handler(
+    message: Message,
+    manager: DatabaseService,
+) -> None:
+    exams = await manager.get_users_unapproved_exams()
+    await message.answer("Экзамены", reply_markup=AdminKeyboard.exams_keyboard(exams))
+
+
+@router.callback_query(ExamApproveCallbackData.filter())
+async def exam_approve_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ExamApproveCallbackData,
+    state: FSMContext,
+) -> None:
+    if not isinstance(query.message, Message) or (bot := query.bot) is None:
+        return
+
+    if callback_data.is_approved is False:
+        await query.message.answer(
+            "Оставьте комментарий",
+            reply_markup=ReplyKeyboardMarkup(
+                keyboard=[
+                    [KeyboardButton(text="Отмена")],
+                ],
+                one_time_keyboard=True,
+                resize_keyboard=True,
+            ),
+        )
+        await state.set_state(FeedbackStateGroup.feedback)
+        await state.update_data(feedback=Feedback(type="EXAM", callback_data=callback_data))
+    else:
+        await query.answer("✅Экзамен одобрен!")
+        await manager.mark_exam(
+            callback_data.exam_id,
+            mark=callback_data.is_approved,
+        )
+        await send_notification(
+            bot=bot,
+            chat_id=callback_data.user_id,
+            message="✅ Экзамен одобрен!",
+        )
+
+    await query.message.delete_reply_markup()
+
+
+@router.callback_query(ExamCallbackData.filter())
+async def exam_cb_handler(
+    query: CallbackQuery,
+    manager: DatabaseService,
+    callback_data: ExamCallbackData,
 ) -> None:
     if not isinstance(query.message, Message):
         return
 
-    if callback_data.is_approved is True:
-        await manager.approve_answer(callback_data.answer_id)
-        await query.answer("✅ Ответ одобрен!")
-    else:
-        await manager.unapprove_answer(callback_data.answer_id)
-        await query.answer("❌ Ответ отклонен!")
-
-    await query.message.delete_reply_markup()
-    await user_answers_callback_handler(
-        query,
-        manager,
-        ApproveUserCallbackData(user_id=callback_data.user_id),
+    exam = await manager.get_exam(callback_data.exam_id)
+    if exam is None:
+        await query.answer("Ответ не найден", show_alert=True)
+        return
+    if not exam.video1_id or not exam.video2_id:
+        await query.answer("Ответ пустой", show_alert=True)
+        return
+    await query.message.reply_media_group(
+        media=[InputMediaVideo(media=exam.video1_id), InputMediaVideo(media=exam.video2_id)],
     )
+    await query.message.answer(
+        text=f"Экзамен <b>{callback_data.user_name}</b>",
+        reply_markup=AdminKeyboard.exam_keyboard(exam.id, user_id=callback_data.user_id),
+        parse_mode="HTML",
+    )
+    await query.message.delete_reply_markup()
+
+
+@router.message(FeedbackStateGroup.feedback)
+async def feedback_handler(
+    message: Message,
+    manager: DatabaseService,
+    state: FSMContext,
+) -> None:
+    if message.text == "Отмена":
+        await state.clear()
+        await message.answer("Отменено")
+        return
+    feedback: Feedback | None = await state.get_value("feedback")
+    if feedback is None:
+        await state.clear()
+        return
+    if (bot := message.bot) is None:
+        await state.clear()
+        return
+    if feedback.type == "ANSWER" and isinstance(feedback.callback_data, ApproveAnswerCallbackData):
+        answer: Answer | None = await manager.get_answer(feedback.callback_data.answer_id)
+        if feedback.callback_data.is_approved is True:
+            await manager.approve_answer(feedback.callback_data.answer_id)
+            await message.reply("✅ Ответ одобрен!")
+        else:
+            await manager.unapprove_answer(feedback.callback_data.answer_id)
+            await message.reply("❌ Ответ отклонен!")
+        await send_notification(
+            bot=bot,
+            chat_id=feedback.callback_data.user_id,
+            message="✅ Ответ одобрен!"
+            if feedback.callback_data.is_approved
+            else f"❌ Ответ отклонен!\nКомменатрий:\n\n{message.text}",
+            media=[InputMediaVideo(media=video.video_id) for video in answer.videos]
+            if answer is not None
+            else None,
+        )
+    elif feedback.type == "EXAM" and isinstance(feedback.callback_data, ExamApproveCallbackData):
+        exam = await manager.get_exam(feedback.callback_data.exam_id)
+        await manager.mark_exam(
+            feedback.callback_data.exam_id,
+            mark=feedback.callback_data.is_approved,
+        )
+        await message.reply(
+            "✅ Экзамен одобрен!" if feedback.callback_data.is_approved else "❌ Экзамен отклонен!",
+        )
+        await send_notification(
+            bot=bot,
+            chat_id=feedback.callback_data.user_id,
+            message="✅ Экзамен одобрен!"
+            if feedback.callback_data.is_approved
+            else f"❌ Экзамен отклонен!\nКомменатрий:\n\n{message.text}",
+            media=[
+                InputMediaVideo(media=exam.video1_id),
+                InputMediaVideo(media=exam.video2_id),
+            ]
+            if exam is not None
+            else None,
+        )
+
+    await state.clear()

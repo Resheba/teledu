@@ -95,5 +95,12 @@ class UnapprovedAnswerDTO(NamedTuple):
     chapter_name: str
 
 
+class UnapprovedExamDTO(NamedTuple):
+    exam_id: int
+    user_name: str
+    user_id: int
+
+
 UserAnswersDTO = TypeAdapter(list[ChapterAnswerDTO])
 UnapprovedAnswersDTO = TypeAdapter(list[UnapprovedAnswerDTO])
+UnapprovedExamsDTO = TypeAdapter(list[UnapprovedExamDTO])
