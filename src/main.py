@@ -18,7 +18,7 @@ async def main() -> None:
         raise FileNotFoundError(f"File {_texts_path} not found. Please, read README.md")
     texts: Texts = Texts.model_validate_json(_texts_path.read_text(encoding="utf-8"))
 
-    manager: AsyncManager = AsyncManager(path="sqlite+aiosqlite:///test.sql", base=Base)
+    manager: AsyncManager = AsyncManager(path="sqlite+aiosqlite:///base.sql", base=Base)
     await manager.execute(text("PRAGMA foreign_keys=ON"))  # fix sqlite fk cascade
     await manager.create_all()
 

@@ -1,5 +1,5 @@
 .SILENT:
-.PHONY: init requirements run, test
+.PHONY: init requirements run test build
 
 
 init:
@@ -17,3 +17,9 @@ test:
 	mkdir -p report/tests/
 	pytest --cov=src --html=report/tests/index.html tests/
 	coverage html -d report/coverage
+
+build:
+	docker build -t teledu .
+
+docker-run:
+	docker run --rm --name=teledu -v "D:\SubLine\teledu\base.sql:\code\base.sql" --env-file=.env teledu

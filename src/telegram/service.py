@@ -69,6 +69,7 @@ class Telegram:
                 BotCommand(command="/exams", description="Exams"),
             ],
         )
+        await self._bot.delete_webhook(drop_pending_updates=True)
         await self._dispatcher.start_polling(
             self._bot,
             manager=manager,

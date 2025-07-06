@@ -1,9 +1,9 @@
 [tool.poetry]
 package-mode = false
-name = "name"
-version = "0.0.0"
+name = "teledu"
+version = "0.2.1"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Resheba <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
