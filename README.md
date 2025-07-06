@@ -32,7 +32,7 @@
    > *(Optional) I highly recommend protecting your database file using Docker volume. To do so, follow the command below:
 
     ```bash
-    docker run --rm --name=teledu -v "<your\path>\base.sql:\code\base.sql" --env-file=.env teledu
+    docker run --name=teledu -v "<your\path>\base.sql:\code\base.sql" --env-file=.env teledu
    ```
 
 ## Basic
