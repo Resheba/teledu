@@ -12,6 +12,10 @@
 
 2. Then, create a `.env` file in the root directory and fill it with the required variables. For more information on `env` variables, see the `.env.example` file.
 
+    > To get user IDs, you could use the `@username_to_id_bot` bot.
+
+    > To get a Telegram token, you should use the `@BotFather` bot.
+
     ```bash
     TELEGRAM_TOKEN=
     ADMIN_IDS=[]
